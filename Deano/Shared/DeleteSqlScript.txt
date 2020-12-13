@@ -1,0 +1,12 @@
+﻿DELETE FROM PostPictures
+DELETE FROM ReportPictures
+DELETE FROM ArticleTags
+DELETE FROM Tags
+DELETE FROM Bookmarks
+DELETE FROM Pictures
+DELETE FROM Messages
+DELETE FROM Posts
+DELETE FROM Reports
+DELETE FROM Threads
+DELETE FROM Forums
+DELETE FROM PostPictures

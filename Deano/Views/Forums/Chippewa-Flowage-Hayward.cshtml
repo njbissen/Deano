@@ -1,0 +1,153 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+
+    var catalog = null;
+    var watermark = 'Enter search text';
+
+    $(document).ready(function () {
+        var show = '@(Request.IsAuthenticated)';
+        if (show != true && show != 'True') {
+            $('.secured').hide();
+        }
+        else {
+            $('.secured').show();
+        }
+
+        var role = '@(ViewBag.Role)';
+        if (role == "Admin") {
+            $('.securedAdmin').show();
+        }
+
+        var tags = $.parseJSON('@(ViewBag.Tags)');
+        $("#forumTagTemplate").tmpl(tags).appendTo('#tags');
+
+        $('#btnForum').removeClass('button');
+        $('#btnForum').addClass('buttonSelected');
+        $('.SearchText').watermark('watermark', watermark);
+        GetActionData('/Forums/_Index', '#topics', '#topicTemplate');
+        catalog = new Catalog('/Forums/Posts?threadId=-1&search=' + '@(ViewBag.Search)');
+        catalog.ItemTemplate = '#threadTemplate';
+        GetCatalogData(0);
+    });
+
+    function loadThreads(id) {
+        resetAccountContent();
+        catalog.Path = '/Forums/Threads?forumId=' + id;
+        catalog.FirstIndex = 0;
+        catalog.SelectedIndex = 0;
+        catalog.ItemTemplate = '#forumTemplate';
+        GetCatalogData(0);
+    }
+
+    function resetAccountContent() {
+        $(Layout.EditPanel).hide();
+        $(Layout.AccountContentPanel).show();
+        $(Layout.AccountContentPanel).html('<div id="catalog"></div><div id="pager"></div>');
+    }
+
+    function loadPosts(threadId, search) {
+        resetAccountContent();
+        catalog.Path = '/Forums/Posts?threadId=' + threadId + '&search=' + search;
+        catalog.FirstIndex = 0;
+        catalog.SelectedIndex = 0;
+        catalog.ItemTemplate = '#threadTemplate';
+        GetCatalogData(0);
+    }
+
+    function GetCatalogData(index) {
+        catalog.GetData(index, hideFavorites);
+    }
+
+    function hideFavorites() {
+        var ddls = $(".gallery").get();
+        for (var ddl in ddls) {
+            var id = $(ddls[ddl]).attr('id');
+            $('#' + id + ' a').lightBox();
+        }
+    }
+
+    function SearchForums() {
+        $('.SearchText').removeWatermark('watermark');
+        $('#txtSearch').rules("add", { required: true,
+            messages: {
+                required: 'Search Text is required'
+            }
+        });
+        $('#txtSearch').validate();
+        var valid = $('#txtSearch').valid();
+        if (valid == true) {
+            resetAccountContent();
+            loadPosts(-1, $('.SearchText').val());
+        }
+        else {
+            $('.SearchText').addClass('watermark');
+        }
+    }
+   
+</script>
+<div style="float: left; width: 280px;">
+    <div id="leftActionsContainer">
+        <div id="leftActions">
+            <div style="text-align: center" id="actionsTitle">
+                Shortcuts</div>
+            <div class="actionsContent">
+                <div style="visibility: visible" class="panelBarHeader">
+                    <div style="float: left; padding-top: 5px">
+                        @using (Ajax.BeginForm(string.Empty, null, new AjaxOptions() { HttpMethod = "Post" }, new { id = "frmSearch" }))
+                        {
+                            <input type="text" id="txtSearch" name="txtSearch" class="SearchText" />
+                            @Html.ValidationMessage("txtSearch")
+                            <span title="Search" onclick="SearchForums()" class="t-icon t-search"></span>
+                        }
+                    </div>
+                    <div style="clear: both">
+                    </div>
+                </div>
+                <div class="panelBarSubItem">
+                    <a href="javascript:void(0)" onclick="loadPosts(-1, 'recent')">Recent Posts</a></div>
+                <div class="panelBarSubItem secured">
+                    <a href="javascript:void(0)" onclick="loadPosts(-1, 'my')">My Posts</a></div>
+                <div class="panelBarSubItem secured">
+                    <a href="javascript:void(0)" onclick="loadPosts(-1, 'favorites')">My Favorites</a></div>
+                <div class="panelBarSubItem securedAdmin">
+                    <a href="javascript:void(0)" onclick="loadCreateForum(-1)">Create Topic</a></div>
+                <div class="">
+                    <div id="tags">
+                    </div>
+                    <div style="clear: both">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="leftActionsContainer">
+        <div id="leftActions">
+            <div style="text-align: center" id="actionsTitle">
+                Topics</div>
+            <div class="actionsContent" id="topics">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="rightWalleyesContainer">
+    <div id="walleyes">
+        <div id="walleyesTitle">
+            Forums</div>
+        <div id="walleyesContent">
+            <div>
+                <div id="accountContent">
+                    <div id="catalog">
+                    </div>
+                    <div id="pager">
+                    </div>
+                </div>
+                <div id="accountContent2">
+                </div>
+            </div>
+            <div style="clear: both">
+                <img src="images/spaser.gif" alt="" width="1" height="1" /></div>
+        </div>
+    </div>
+</div>

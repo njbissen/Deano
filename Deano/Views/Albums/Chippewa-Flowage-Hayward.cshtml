@@ -1,0 +1,125 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+
+    var catalog = null;
+    var watermark = 'Enter search text';
+
+    $(document).ready(function () {
+        $('#btnPhotos').removeClass('button');
+        $('#btnPhotos').addClass('buttonSelected');
+        $('.SearchText').watermark('watermark', watermark);
+
+        var tags = $.parseJSON('@(ViewBag.Tags)');
+        $("#albumTagTemplate").tmpl(tags).appendTo('#tags');
+        GetActionData('/Albums/_Albums', '#topics', '#albumTopicTemplate');
+
+        catalog = new Catalog('/Albums/_Index?album=recent');
+        catalog.ItemTemplate = '#albumTemplate';
+        GetCatalogData(0);
+    });
+
+    function loadPhotos(id, search) {
+        resetAccountContent();
+        catalog.Path = '/Albums/_Index?album=' + id + '&search=' + search;
+        catalog.FirstIndex = 0;
+        catalog.SelectedIndex = 0;
+        catalog.ItemTemplate = '#albumTemplate';
+        GetCatalogData(0);
+    }
+
+    function resetAccountContent() {
+        $(Layout.AccountContentPanel).html('<div id="catalog"></div><div id="pager"></div>');
+    }
+
+    function GetCatalogData(index) {
+        catalog.GetData(index, getGallery);
+    }
+
+    function getGallery() {
+        $('.gallery a').lightBox();
+    }
+
+    function SearchPhotos() {
+        $('.SearchText').removeWatermark('watermark');
+        $('#txtSearch').rules("add", { required: true,
+            messages: {
+                required: 'Search Text is required'
+            }
+        });
+        $('#txtSearch').validate();
+        var valid = $('#txtSearch').valid();
+        if (valid == true) {
+            resetAccountContent();
+            loadPhotos(-1, $('.SearchText').val());
+        }
+        else {
+            $('.SearchText').addClass('watermark');
+        }
+    }
+   
+</script>
+<div style="float: left; width: 280px;">
+
+    <div id="leftActionsContainer">
+        <div id="leftActions">
+            <div style="text-align: center" id="actionsTitle">
+                Albums
+            </div>
+            <div class="actionsContent">
+                <div class="panelBarSubItem">
+                    <a href="javascript:void(0)" onclick="loadPhotos('recent')">Recent Photos</a>
+                </div>
+            </div>
+            <div class="actionsContent" id="topics">
+            </div>
+        </div>
+    </div>
+    <div style="visibility:hidden"  id="leftActionsContainer">
+        <div id="leftActions">
+            <div style="text-align: center" id="actionsTitle">
+                Shortcuts</div>
+            <div class="actionsContent">
+                <div style="visibility: hidden" class="panelBarHeader">
+                    <div style="float: left; padding-top: 5px">
+                        @using (Ajax.BeginForm(string.Empty, null, new AjaxOptions() { HttpMethod = "Post" }, new { id = "frmSearch" }))
+                        {
+                            <input type="text" id="txtSearch" name="txtSearch" class="SearchText" />
+                            @Html.ValidationMessage("txtSearch")
+                            <span title="Search" onclick="SearchPhotos()" class="t-icon t-search"></span>
+                        }
+                    </div>
+                    <div style="clear: both">
+                    </div>
+                </div>
+                <div class="panelBarSubItem">
+                    <a href="javascript:void(0)" onclick="loadPhotos('recent')">Recent Photos</a></div>
+                <div  style="visibility:hidden" class="">
+                    <div id="tags">
+                    </div>
+                    <div style="clear: both">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="rightWalleyesContainer">
+    <div id="walleyes">
+        <div id="walleyesTitle">
+            Photos</div>
+        <div id="walleyesContent">
+            <div>
+                <div id="accountContent">
+                    <div id="catalog">
+                    </div>
+                    <div id="pager">
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both">
+                <img src="images/spaser.gif" alt="" width="1" height="1" /></div>
+        </div>
+    </div>
+</div>

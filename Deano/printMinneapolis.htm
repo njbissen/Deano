@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Directions to Deano's Guide Serice from Minneapolis, MN to the Hayward Lakes Area</title>
+    <link href="/Content/Maps.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/2011.3.1306/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-ui.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  
+<script type="text/javascript">
+    var directionDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+    var stepDisplay;
+    var markerArray = [];
+
+    $(function () {
+        var minneapolis = 'minneapolis,mn';
+        initializeMinneapolis(minneapolis)
+    });
+ 
+
+    function initializeMinneapolis(origin) {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var siskos = new google.maps.LatLng(45.952192, -91.215878);
+
+        var myOptions = {
+            zoom: 7,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            center: siskos
+        }
+
+        map = new google.maps.Map(document.getElementById("map_canvas_minneapolis"), myOptions);
+        var marker = new google.maps.Marker({
+            position: siskos,
+            map: map
+        });
+        marker.setTitle("Sisko's Pine Resort");
+        attachSecretMessage(marker);
+        directionsDisplay.setMap(map);
+        directionsDisplay.setPanel(document.getElementById("directions_minneapolis"));
+
+        calcRoute(origin);
+    }
+ 
+
+    function calcRoute(origin) {
+        var siskos = new google.maps.LatLng(45.952192, -91.215878);
+        var start = origin; // 'madison, wi'; // document.getElementById("start").value;
+
+        var request = {
+            origin: start,
+            destination: siskos,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING
+        };
+
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            }
+        });
+    }
+
+    function attachSecretMessage(marker) {
+        var message = "Sisko's Pine Resort";
+        var infowindow = new google.maps.InfoWindow(
+      { content: message,
+          size: new google.maps.Size(50, 50)
+      });
+        google.maps.event.addListener(marker, 'click', function () {
+            infowindow.open(map, marker);
+        });
+    }
+</script>
+</head>
+<body>
+    <div id="map_canvas_minneapolis" style="top: 0px; height: 250px">
+    </div>
+    <div id="directions_minneapolis" style="">
+    </div>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/slideshow.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Maps.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/SiteTan.css")" rel="stylesheet" type="text/css" />
+@*    <link href="@Url.Content("~/Content/Site2.css")" rel="stylesheet" type="text/css" />*@
+    <script src="@Url.Content("~/Scripts/2011.3.1306/jquery-1.6.4.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.tmpl.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.tinywatermark-2.1.0.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/layout.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/home.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/validation.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/MicrosoftAjax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/MicrosoftMvcAjax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/MicrosoftMvcValidation.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.rf.slideshow.js")" type="text/javascript"></script>
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/base/jquery-ui.css")"
+        type="text/css" media="all" />
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    @(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.transparent.css").Combined(true).Compress(true)))</head>
+<body>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            cache: false
+        });
+
+        function login() {
+            $('#Username').rules("add", { required: true, email: true,
+                messages: {
+                    required: 'Username is required.',
+                    email: 'Username is not valid.'
+                }
+            });
+            $('#Password').rules("add", { required: true,
+                messages: {
+                    required: 'Password is required.'
+                }
+            });
+            $('#Username').validate();
+            $('#Password').validate();
+            var path = '@Url.Content("/Users/LogIn")';
+            var valid = $('#frmLogIn').valid();
+
+            if (valid == true) {
+                var username = $('#Username').val();
+                var password = $('#Password').val();
+                var values = {
+                    password: password,
+                    username: username
+                };
+                $.ajax({ url: path, data: values, async: true, cache: false, dataType: "json", success: loginResult });
+            }
+        }
+
+        function loginResult(results) {
+            var success = results.Success;
+            var path = '@Url.Content("/Users/Header")';
+            if (success == true) {
+                Layout.RefreshPanel(path, '#deano');
+            }
+        }
+
+        function logout() {
+            var path = '@Url.Content("/Users/LogOut")';
+            $.ajax({ url: path, async: true, cache: false, dataType: "json", success: logoutResult });
+        }
+
+        function logoutResult(results) {
+            var success = results.Success;
+            var path = '@Url.Content("/Users/Header")';
+            Layout.RefreshPanel(path, '#deano');
+        }
+
+    </script>
+    <div class="page">
+        <div id="header">
+            <div id="title">
+                <img alt="Deano's Guide Service" style="float: left" src="../../Content/Images/deanos_logo.gif" />
+                <div id="menu" style="padding-top: 110px">
+                    <div class="button">
+                        <a href="javascript:void(0)">Home</a>
+                    </div>  <div class="button">
+                        <a href="javascript:void(0)">Rates</a>
+                    </div>
+                    <div class="button">
+                        <a href="javascript:void(0)">Reports</a>
+                    </div>
+                    <div class="button">
+                        <a href="javascript:void(0)">Photos</a>
+                    </div>
+                    <div class="button">
+                        <a href="javascript:void(0)">Forum</a>
+                    </div>
+                    <div class="button">
+                        <a href="javascript:void(0)">Directions</a>
+                    </div>
+                    <div class="button">
+                        <a href="javascript:void(0)">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+        <div id="mainContent">
+            @RenderBody()
+        </div>
+        </div>
+    @(Html.Telerik().ScriptRegistrar().DefaultGroup(group => group.Combined(true).Compress(true)))</body>
+@Html.Telerik().ScriptRegistrar().jQuery(false).DefaultGroup(group =>
+                     {
+                         group.Add("telerik.common.js");
+                         group.Add("telerik.grid.js");
+                         group.Add("telerik.tabstrip.min.js");
+                         group.Add("telerik.list.min.js");
+                         group.Add("telerik.window.min.js");
+                         group.Add("telerik.editor.min.js");
+                         group.Add("telerik.upload.min.js");
+                         group.Add("telerik.timepicker.min.js");
+                         group.Add("telerik.grid.editing.min.js");
+                         group.Add("telerik.grid.filtering.js").Add("telerik.treeview.min.js")
+                             .Add("telerik.datepicker.min.js").Add("telerik.calendar.min.js");
+                     })
+</body>
+<script id="pagerTemplate" type="text/x-jquery-tmpl"> 
+   {{each Pages}}
+    {{if Visible==true}}
+        {{if Selected==true}}
+            <div class="selectedPage">
+                <a onclick="GetCatalogData('${Value}')" href="javascript:void(0)">${Name}</a> 
+            </div>
+        {{else}}
+            <div class="page">
+                <a onclick="GetCatalogData('${Value}')" href="javascript:void(0)">${Name}</a> 
+            </div>
+        {{/if}}
+    {{/if}}
+   {{/each}}
+</script>
+<script id="forumTemplate" type="text/x-jquery-tmpl"> 
+<div class="commands">
+    <button onclick="loadCreateThread(-1,${ForumId})" class="t-button">
+        Create Thread</button>
+</div>
+<div class="text" style="height: 20px; border-bottom: 0px solid black">
+    <div style="float: left">
+        <span class="color">Threads in ${Title}</span>
+    </div>
+    <div style="float: right">
+        <div class="color" style="float: left; text-align: left">
+            # of Posts</div>
+        <div class="color" style="text-align: left; margin-left: 10px; width: 200px; float: left">
+            Last Post</div>
+    </div>
+</div>
+{{each Threads}} 
+<div class="thread">
+    <div style="float: left">
+        <div class="threadTitle">
+            <a href="javascript:void(0)" onclick="loadPosts(${ThreadId})">${Title}</a></div>
+        <div class="threadAuthor">
+             ${CreatedBy}</div>
+    </div>
+    <div style="float: right">
+        <div style="float: left; width: 60px; text-align: center">
+           ${Total}</div>
+        <div style="text-align: left; margin-left: 10px; width: 200px; float: left">
+            ${UpdatedBy}</div>
+    </div>
+</div>
+{{/each}}
+</script>
+<script id="threadTemplate" type="text/x-jquery-tmpl"> 
+<div class="commands"/>
+{{each Posts}} 
+<div class="post">
+<div>
+    <span class="color">${Title}</span></div>
+   <div class="text">${Content}</div>
+<div class="commands">
+    <button type="button" onclick="loadCreatePost(-1,${ThreadId})" class="t-button">
+        Reply</button>
+    <button class="t-button" onclick="loadThreads(${ForumId})">
+        Back</button>
+        {{if AllowEdit==true}}
+            <button class="t-button" onclick="loadCreatePost(${PostId},${ThreadId})">Edit</button> {{/if}} 
+        {{if Favorite==true}}
+            <button class="t-button" onclick="markPost(${PostId},this)">Forget</button> 
+        {{else}}
+            <button class="t-button" onclick="markPost(${PostId},this)">Remember</button> 
+        {{/if}} 
+        <input type="hidden" class="marked" value="${Favorite}"/>
+</div>
+<div style="clear:both"/>
+</div>
+{{/each}}
+</script>
+<script id="reportTemplate" type="text/x-jquery-tmpl"> 
+<div class="commands"/>
+{{each Reports}} 
+<div class="post">
+<div>
+    <span class="color">${Title}</span></div>
+   <div class="text">${Content}</div>
+<div class="commands">
+      {{if Favorite==true}}
+            <button class="t-button" onclick="markReport(${ReportId},this)">Forget</button> 
+        {{else}}
+            <button class="t-button" onclick="markReport(${ReportId},this)">Remember</button> 
+        {{/if}} 
+        <input type="hidden" class="marked" value="${Favorite}"/></div>
+<div style="clear:both"/>
+</div>
+{{/each}}
+</script>
+<script id="slideshowTemplate" type="text/x-jquery-tmpl"> 
+<div id="slideshow" class="slideshow" style="width:630px;margin-top:20px">
+{{each Photos}} 
+<img src="${Image}" alt="${Title}" id="${PhotoId}" />
+{{/each}}
+</div>
+</script>
+<script id="slideshowTemplate2" type="text/x-jquery-tmpl"> 
+<div id="makeMeScrollable" style="width:630px;margin-top:20px">
+{{each Photos}} 
+<img src="${Image}" alt="${Title}" id="${PhotoId}" />
+{{/each}}
+</div>
+</script>
+<script id="albumTemplate" type="text/x-jquery-tmpl"> 
+{{each Photos}} 
+<img style=" margin:2px 3px 2px 0px" width="96px" src="${Image}" alt="${Title}" id="${PhotoId}" />
+{{/each}}
+</script>
+<script id="jsonResponseLayout" type="text/x-jquery-tmpl">
+<div id="jsonResponse${Container}">
+    <div id="jsonSummary${Container}">
+    </div>
+</div>
+<div id="progress${Container}" style="display: none;">
+    <img alt="loading" src="../../../../Content/2011.3.1115/Black/loading.gif" />
+</div>
+</script>
+<script id="jsonResponse" type="text/x-jquery-tmpl">
+{{if Display==true}}
+<div class="t-in" style="margin: 6px 0px 0px 0px; padding: 0px 0px 10px 0px; font-weight: bold;
+    border-style: solid; border-width:2px; border-color: #2E7821; background-color: Yellow; color: black">
+    <div title="Click to close" onclick="javascript:Response.onClose('${Container}')"
+        style="margin-left: 25px; margin-top: 10px">
+        <table style="border: 0px none">
+            {{each Messages}} {{if Display==true}}
+            <tr style="border: 0px none">
+                {{if Type==0}}
+                <td style="border: 0px none">
+                    <img alt="Info" style="border: 0px none; margin-right: 5px" src="/Content/Images/info.png" />
+                </td>
+                {{/if}} {{if Type==2}}
+                <td style="border: 0px none">
+                    <img alt="Debug" style="border: 0px none; margin-right: 5px" src="/Content/Images/debug.png" />
+                </td>
+                {{/if}}{{if Type==3}}
+                <td style="border: 0px none">
+                    <img alt="Warning" style="border: 0px none; margin-right: 5px" src="/Content/Images/warning.png" />
+                </td>
+                {{/if}}{{if Type==4}}
+                <td style="border: 0px none">
+                    <img alt="Error" style="border: 0px none; margin-right: 5px" src="/Content/Images/error.png" />
+                </td>
+                {{/if}}
+                <td style="border: 0px none">
+                    ${Text}
+                </td>
+            </tr>
+            {{/if}} {{/each}}
+        </table>
+    </div>
+</div>
+{{/if}}
+</script>
+</html>

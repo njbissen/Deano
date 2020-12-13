@@ -1,0 +1,24 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnRates').removeClass('button');
+        $('#btnRates').addClass('buttonSelected');
+    });
+</script>
+@Html.Partial("Friends")
+<div id="walleyesContainer">
+    <div id="walleyes">
+        <div id="walleyesTitle">
+            Current Fishing Guide Rates</div>
+        <div id="walleyesContent">
+            @Html.Partial("Rates")
+        </div>
+    </div>
+</div>
+<div style="float: left; margin-left: 80px; margin-top: 20px">
+    <img height="170px" src="../../Content/images/deano.jpg" />
+</div>
+<div style="float: left; margin-left: 60px; margin-top: 20px">
+    <img height="170px" src="../../Content/images/deano.jpg" />
+</div>
+<div style="clear: both">
+</div>

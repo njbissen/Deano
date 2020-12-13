@@ -1,0 +1,141 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+
+    var catalog = null;
+    var watermark = 'Enter search text';
+    $(document).ready(function () {
+        var show = '@(Request.IsAuthenticated)';
+        if (show != true && show != 'True') {
+            $('.secured').hide();
+        }
+        else {
+            $('.secured').show();
+        }
+
+        var role = '@(ViewBag.Role)';
+        if (role == "Admin") {
+            $('.securedAdmin').show();
+        }
+
+        $('#btnReports').removeClass('button');
+        $('#btnReports').addClass('buttonSelected');
+
+        var tags = $.parseJSON('@(ViewBag.Tags)');
+        $("#reportTagTemplate").tmpl(tags).appendTo('#tags');
+
+        GetActionData('/FishReports/_Topics', '#topics', '#reportTopicTemplate');
+        catalog = new Catalog('/FishReports/_Index?search=' + '@(ViewBag.Search)');
+        catalog.ItemTemplate = '#reportTemplate';
+        GetCatalogData(0);
+    });
+
+    function loadReports(search, yearId, monthId) {
+        resetAccountContent();
+        catalog.Path = '/FishReports/_Index?search=' + search + '&yearId=' + yearId + '&monthId=' + monthId;
+        catalog.FirstIndex = 0;
+        catalog.SelectedIndex = 0;
+        catalog.ItemTemplate = '#reportTemplate';
+        GetCatalogData(0);
+    }
+
+    function resetAccountContent() {
+        $(Layout.AccountContentPanel).html('<div id="catalog"></div><div id="pager"></div>');
+    }
+
+    function GetCatalogData(index) {
+        catalog.GetData(index, hideFavorites);
+    }
+
+    function hideFavorites() {
+        var ddls = $(".gallery").get();
+        for (var ddl in ddls) {
+            var id = $(ddls[ddl]).attr('id');
+            $('#' + id + ' a').lightBox();
+        }
+    }
+
+    function SearchReports() {
+        $('.SearchText').removeWatermark('watermark');
+        $('#txtSearch').rules("add", { required: true,
+            messages: {
+                required: 'Search Text is required'
+            }
+        });
+        $('#txtSearch').validate();
+        var valid = $('#txtSearch').valid();
+        if (valid == true) {
+            resetAccountContent();
+            loadReports($('.SearchText').val());
+        }
+        else {
+            $('.SearchText').addClass('watermark');
+        }
+    }
+   
+</script>
+<div style="float: left; width: 280px;">
+    <div id="leftActionsContainer">
+        <div id="leftActions">
+            <div style="text-align: center" id="actionsTitle">
+                Shortcuts</div>
+            <div class="actionsContent">
+                <div style="visibility: visible" class="panelBarHeader">
+                    <div style="float: left; padding-top: 5px">
+                        @using (Ajax.BeginForm(string.Empty, null, new AjaxOptions() { HttpMethod = "Post" }, new { id = "frmSearch" }))
+                        {
+                            <input type="text" id="txtSearch" name="txtSearch" class="SearchText" />
+                            @Html.ValidationMessage("txtSearch")
+                            <span title="Search" onclick="SearchReports()" class="t-icon t-search"></span>
+                        }
+                    </div>
+                    <div style="clear: both">
+                    </div>
+                </div>
+                <div class="panelBarSubItem">
+                    <a href="javascript:void(0)" onclick="loadReports('recent')">Recent Reports</a></div>
+                <div class="panelBarSubItem secured">
+                    <a href="javascript:void(0)" onclick="loadReports('my')">My Reports</a></div>
+                <div class="panelBarSubItem secured">
+                    <a href="javascript:void(0)" onclick="loadReports('favorites')">My Favorites</a></div>
+                <div class="panelBarSubItem securedAdmin">
+                    <a href="javascript:void(0)" onclick="loadCreateFishReport(-1,true)">Create Fish Report</a></div>
+                <div class="">
+                    <div id="tags">
+                    </div>
+                    <div style="clear: both">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="leftActionsContainer">
+        <div id="leftActions">
+            <div style="text-align: center" id="actionsTitle">
+                @DateTime.Now.Year</div>
+            <div class="actionsContent" id="topics">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="rightWalleyesContainer">
+    <div id="walleyes">
+        <div id="walleyesTitle">
+            Fish Reports</div>
+        <div id="walleyesContent">
+            <div>
+                <div id="accountContent">
+                    <div id="catalog">
+                    </div>
+                    <div id="pager">
+                    </div>
+                </div>
+                <div id="accountContent2">
+                </div>
+            </div>
+            <div style="clear: both">
+                <img src="images/spaser.gif" alt="" width="1" height="1" /></div>
+        </div>
+    </div>
+</div>

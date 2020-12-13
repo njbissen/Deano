@@ -1,0 +1,106 @@
+﻿@model Deano.Models.Prototypes.Users.User
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.tmpl.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/validation.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/response.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    var responseCreateAccount = null;
+
+    function onBeginCreateAccount(e) {
+        var v = $('#frmAccessDenied').validate();
+        responseCreateAccount.onBegin(e, 'responseCreateAccount');
+    }
+
+    function onSuccessCreateAccount(e) {
+        if (e.Success == true) {
+            loadMemberIndex();
+        }
+        else {
+            responseCreateAccount.onSuccess(e, null);
+        }
+        $('html').prop('scrollTop', 0);
+    }
+
+    $(function () {
+        $('#accessUsername').rules("add", { email: true,
+            messages: {
+                email: "Please enter a valid email address."
+            }
+        });
+
+        responseCreateAccount = new jsonResponse('responseCreateAccount');
+        Validation.markRequiredFields('#frmAccessDenied');
+
+        $("input").blur(function () {
+            var txt = $(this).val();
+            $(this).val(txt);
+            $(this).valid();
+        });
+    });
+
+    function allowAccess() {
+
+        $('#accessUsername').validate();
+        $('#accessPassword').validate();
+        var path = '@Url.Content("/Users/LogIn")';
+        var valid = $('#frmAccessDenied').valid();
+        if (valid == true) {
+            var username = $('#accessUsername').val();
+            var password = $('#accessPassword').val();
+            var values = {
+                password: password,
+                username: username
+            };
+            $.ajax({ url: path, data: values, async: true, cache: false, dataType: "json", success: allowAccessResult });
+        }
+    }
+
+    function allowAccessResult(results) {
+        var success = results.Success;
+        if (success == true) {
+            unloadAccessDenied();
+            //Layout.SwapPanelBack(Layout.AccountContentPanel);
+            var path = '@Url.Content("/Users/Header")';
+            Layout.RefreshPanel(path, '#header');
+            $('.secured').show();
+            var role = '@(ViewBag.Role)';
+            if (results.Role == "Admin") {
+                $('.securedAdmin').show();
+            }
+        }
+        else {
+            responseCreateAccount.onSuccess(results, null);
+        }
+    }
+</script>
+@using (Ajax.BeginForm("Login", "Users", new { userId = Model.UserId }, new AjaxOptions() { HttpMethod = "Post", OnBegin = "onBeginCreateAccount", OnSuccess = "onSuccessCreateAccount", OnComplete = "responseCreateAccount.onComplete" }, new { id = "frmAccessDenied" }))
+{
+    <div id="walleyesTitle">
+        Access Denied, Please Log In...</div>
+    <div id="responseCreateAccount">
+    </div>    
+    <div class="nameValue">
+        <div class="label">
+            Username:</div>
+        <div class="field inputTableCell" style="width:180px">
+            @Html.TextBoxFor(m => m.Username, new { id = "accessUsername", @class = "requiredField credentials" })
+            @Html.ValidationMessageFor(m => m.Username)</div>
+    </div>
+    <div class="nameValue">
+        <div class="label">
+            Password:</div>
+        <div class="field inputTableCell" style="width:180px">
+            @Html.PasswordFor(m => m.Password, new { id = "accessPassword", @class = "requiredField credentials" })
+            @Html.ValidationMessageFor(m => m.Password)</div>
+    </div>
+  
+    <div style="clear: both" />
+    <div style="margin-top: 10px;" class="buttonMap">
+        <a style="text-decoration: underline" onclick="allowAccess()" href="javascript:void(0)">
+            Login</a></div>
+    <div style="margin-top: 10px;" class="buttonMap">
+        <a style="text-decoration: underline" onclick="unloadAccessDenied()" href="javascript:void(0)">
+            Back</a></div>
+    <div style="clear: both" />
+}

@@ -1,0 +1,162 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    var directionsService = new google.maps.DirectionsService();
+    var mapMinneapolis;
+    var directionDisplayMinneapolis;
+    var mapMadison;
+    var directionDisplayMadison;
+    var stepDisplay;
+    var markerArray = [];
+
+
+    $(document).ready(function () {
+        $('#btnDirections').removeClass('button');
+        $('#btnDirections').addClass('buttonSelected');
+        var origin = 'madison,wi';
+        var minneapolis = 'minneapolis,mn';
+        initializeMinneapolis(minneapolis);
+        initializeMadison(origin);
+    });
+
+    function loadMapMadison() {
+        $("#directions_madison").hide();
+        $("#map_canvas_madison").show();
+    }
+
+    function loadRouteMadison() {
+        $("#map_canvas_madison").hide();
+        $("#directions_madison").show();
+    }
+
+    function loadMapMinneapolis() {
+        $("#directions_minneapolis").hide();
+        $("#map_canvas_minneapolis").show();
+    }
+
+    function loadRouteMinneapolis() {
+        $("#map_canvas_minneapolis").hide();
+        $("#directions_minneapolis").show();
+    }
+
+    function initializeMinneapolis(origin) {
+        directionsDisplayMinneapolis = new google.maps.DirectionsRenderer();
+        var siskos = new google.maps.LatLng(45.906790, -91.250020);
+
+        var myOptions = {
+            zoom: 7,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            center: siskos
+        }
+
+        map = new google.maps.Map(document.getElementById("map_canvas_minneapolis"), myOptions);
+        var marker = new google.maps.Marker({
+            position: siskos,
+            map: map
+        });
+        marker.setTitle("Deano's Guide Service");
+        attachSecretMessage(marker);
+        directionsDisplayMinneapolis.setMap(map);
+        directionsDisplayMinneapolis.setPanel(document.getElementById("directions_minneapolis"));
+
+        calcRoute(origin, directionsDisplayMinneapolis);
+    }
+    function initializeMadison(origin) {
+        directionsDisplayMadison = new google.maps.DirectionsRenderer();
+        var siskos = new google.maps.LatLng(45.906790, -91.250020);
+
+        var myOptions = {
+            zoom: 7,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            center: siskos
+        }
+
+        map = new google.maps.Map(document.getElementById("map_canvas_madison"), myOptions);
+        var marker = new google.maps.Marker({
+            position: siskos,
+            map: map,
+            title: "Deano's Guide Service"
+        });
+        marker.setTitle("Deano's Guide Service");
+        attachSecretMessage(marker);
+        directionsDisplayMadison.setMap(map);
+        directionsDisplayMadison.setPanel(document.getElementById("directions_madison"));
+
+        calcRoute(origin, directionsDisplayMadison);
+    }
+
+    function calcRoute(origin, directionsDisplay) {
+        var siskos = new google.maps.LatLng(45.906790, -91.250020);
+        var start = origin; // 'madison, wi'; // document.getElementById("start").value;
+
+        var request = {
+            origin: start,
+            destination: siskos,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING
+        };
+
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            }
+        });
+    }
+
+    function attachSecretMessage(marker) {
+        //        marker.setTitle("Deano's Guide Service at Sisko's Pine Resort");
+        //        var infowindow = new google.maps.InfoWindow(
+        //      { content: message,
+        //          size: new google.maps.Size(50, 50)
+        //      });
+        //        google.maps.event.addListener(marker, 'click', function () {
+        //            infowindow.open(map, marker);
+        //        });
+    }
+</script>
+<div id="walleyesContainer" style="float:left">
+    <div id="walleyes">
+        <div id="walleyesTitle">
+            Directions from Madison</div>
+        <div id="walleyesContent">
+            <div class="buttonsMap">
+                <div class="buttonMap">
+                    <a href="javascript:void(0)" onclick="loadMapMadison()">Map</a></div>
+                <div class="buttonMap">
+                    <a href="javascript:void(0)" onclick="loadRouteMadison()">Route</a></div>
+                <div class="buttonMap">
+                    <a href="javascript:void(0)" onclick="window.open('/printMadison.htm')">Print</a></div>
+                <div style="clear: both">
+                </div>
+            </div>
+            <div id="map_canvas_madison" style="top: 0px; height: 250px">
+            </div>
+            <div id="directions_madison" style="display: none; height: 250px; width: 690px; overflow: auto">
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("Friends")
+<div id="walleyesContainer" style="float:left">
+    <div id="walleyes">
+        <div id="walleyesTitle">
+            Directions from Minneapolis</div>
+        <div id="walleyesContent">
+            <div class="buttonsMap">
+                <div class="buttonMap">
+                    <a href="javascript:void(0)" onclick="loadMapMinneapolis()">Map</a></div>
+                <div class="buttonMap">
+                    <a href="javascript:void(0)" onclick="loadRouteMinneapolis()">Route</a></div>
+                <div class="buttonMap">
+                    <a href="javascript:void(0)" onclick="window.open('/printMinneapolis.htm')">Print</a></div>
+                <div style="clear: both">
+                </div>
+            </div>
+            <div id="map_canvas_minneapolis" style="top: 0px; height: 250px">
+            </div>
+            <div id="directions_minneapolis" style="display: none; height: 250px; width: 690px;
+                overflow: auto">
+            </div>
+        </div>
+    </div>
+</div>

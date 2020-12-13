@@ -1,0 +1,1247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Deano.Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="DeanoModelsStoreContainer">
+          <EntitySet Name="ArticleTags" EntityType="Deano.Models.Store.ArticleTags" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Bookmarks" EntityType="Deano.Models.Store.Bookmarks" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Forums" EntityType="Deano.Models.Store.Forums" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Messages" EntityType="Deano.Models.Store.Messages" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="MetaTags" EntityType="Deano.Models.Store.MetaTags" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Pictures" EntityType="Deano.Models.Store.Pictures" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="PostPictures" EntityType="Deano.Models.Store.PostPictures" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Posts" EntityType="Deano.Models.Store.Posts" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ReportPictures" EntityType="Deano.Models.Store.ReportPictures" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Reports" EntityType="Deano.Models.Store.Reports" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Roles" EntityType="Deano.Models.Store.Roles" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Settings" EntityType="Deano.Models.Store.Settings" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Tags" EntityType="Deano.Models.Store.Tags" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Threads" EntityType="Deano.Models.Store.Threads" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Users" EntityType="Deano.Models.Store.Users" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <AssociationSet Name="FK_ArticleTags_Posts" Association="Deano.Models.Store.FK_ArticleTags_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="ArticleTags" EntitySet="ArticleTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArticleTags_Reports" Association="Deano.Models.Store.FK_ArticleTags_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="ArticleTags" EntitySet="ArticleTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArticleTags_Tags" Association="Deano.Models.Store.FK_ArticleTags_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="ArticleTags" EntitySet="ArticleTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookmarks_Posts" Association="Deano.Models.Store.FK_Bookmarks_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Bookmarks" EntitySet="Bookmarks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookmarks_Reports" Association="Deano.Models.Store.FK_Bookmarks_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Bookmarks" EntitySet="Bookmarks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookmarks_Users" Association="Deano.Models.Store.FK_Bookmarks_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Bookmarks" EntitySet="Bookmarks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Forums_Users" Association="Deano.Models.Store.FK_Forums_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Forums" EntitySet="Forums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostPictures_Pictures" Association="Deano.Models.Store.FK_PostPictures_Pictures">
+            <End Role="Pictures" EntitySet="Pictures" />
+            <End Role="PostPictures" EntitySet="PostPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostPictures_Posts" Association="Deano.Models.Store.FK_PostPictures_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="PostPictures" EntitySet="PostPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Threads" Association="Deano.Models.Store.FK_Posts_Threads">
+            <End Role="Threads" EntitySet="Threads" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Users" Association="Deano.Models.Store.FK_Posts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportPictures_Pictures" Association="Deano.Models.Store.FK_ReportPictures_Pictures">
+            <End Role="Pictures" EntitySet="Pictures" />
+            <End Role="ReportPictures" EntitySet="ReportPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportPictures_Reports" Association="Deano.Models.Store.FK_ReportPictures_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="ReportPictures" EntitySet="ReportPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_Users" Association="Deano.Models.Store.FK_Reports_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Threads_Forums" Association="Deano.Models.Store.FK_Threads_Forums">
+            <End Role="Forums" EntitySet="Forums" />
+            <End Role="Threads" EntitySet="Threads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Threads_Users" Association="Deano.Models.Store.FK_Threads_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Threads" EntitySet="Threads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Deano.Models.Store.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ArticleTags">
+          <Key>
+            <PropertyRef Name="ArticleTagId" />
+          </Key>
+          <Property Name="ArticleTagId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PostId" Type="int" />
+          <Property Name="ReportId" Type="int" />
+          <Property Name="TagId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bookmarks">
+          <Key>
+            <PropertyRef Name="BookmarkId" />
+          </Key>
+          <Property Name="BookmarkId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="PostId" Type="int" />
+          <Property Name="ReportId" Type="int" />
+        </EntityType>
+        <EntityType Name="Forums">
+          <Key>
+            <PropertyRef Name="ForumId" />
+          </Key>
+          <Property Name="ForumId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Tags" Type="varchar" MaxLength="250" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MessageDate" Type="datetime" Nullable="false" />
+          <Property Name="FromEmail" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="FromName" Type="varchar" MaxLength="100" />
+          <Property Name="FromPhone" Type="varchar" MaxLength="50" />
+          <Property Name="Subject" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Message" Type="varchar" Nullable="false" MaxLength="2000" />
+          <Property Name="RequestDate" Type="datetime" />
+          <Property Name="NumberOfPeople" Type="int" />
+          <Property Name="NumberOfDays" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Catch" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="MetaTags">
+          <Key>
+            <PropertyRef Name="MetaTagId" />
+          </Key>
+          <Property Name="MetaTagId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Value" Type="varchar" Nullable="false" MaxLength="1000" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pictures">
+          <Key>
+            <PropertyRef Name="PictureId" />
+          </Key>
+          <Property Name="PictureId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Path" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="Tags" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="PostPictures">
+          <Key>
+            <PropertyRef Name="PostPictureId" />
+          </Key>
+          <Property Name="PostPictureId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="PictureId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="varchar" MaxLength="100" />
+          <Property Name="Body" Type="varchar" Nullable="false" MaxLength="5000" />
+          <Property Name="Tags" Type="varchar" MaxLength="250" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ThreadId" Type="int" Nullable="false" />
+          <Property Name="TemporaryId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportPictures">
+          <Key>
+            <PropertyRef Name="ReportPictureId" />
+          </Key>
+          <Property Name="ReportPictureId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ReportId" Type="int" Nullable="false" />
+          <Property Name="PictureId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Body" Type="varchar" Nullable="false" MaxLength="5000" />
+          <Property Name="Tags" Type="varchar" MaxLength="250" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="TemporaryId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Access" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Name="SettingId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Value" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Encrypted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="TagId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="TagTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Threads">
+          <Key>
+            <PropertyRef Name="ThreadId" />
+          </Key>
+          <Property Name="ThreadId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Tags" Type="varchar" MaxLength="250" />
+          <Property Name="ForumId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Handle" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ArticleTags_Posts">
+          <End Role="Posts" Type="Deano.Models.Store.Posts" Multiplicity="0..1" />
+          <End Role="ArticleTags" Type="Deano.Models.Store.ArticleTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="ArticleTags">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArticleTags_Reports">
+          <End Role="Reports" Type="Deano.Models.Store.Reports" Multiplicity="0..1" />
+          <End Role="ArticleTags" Type="Deano.Models.Store.ArticleTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="ArticleTags">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArticleTags_Tags">
+          <End Role="Tags" Type="Deano.Models.Store.Tags" Multiplicity="1" />
+          <End Role="ArticleTags" Type="Deano.Models.Store.ArticleTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="TagId" />
+            </Principal>
+            <Dependent Role="ArticleTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookmarks_Posts">
+          <End Role="Posts" Type="Deano.Models.Store.Posts" Multiplicity="0..1" />
+          <End Role="Bookmarks" Type="Deano.Models.Store.Bookmarks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="Bookmarks">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookmarks_Reports">
+          <End Role="Reports" Type="Deano.Models.Store.Reports" Multiplicity="0..1" />
+          <End Role="Bookmarks" Type="Deano.Models.Store.Bookmarks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="Bookmarks">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookmarks_Users">
+          <End Role="Users" Type="Deano.Models.Store.Users" Multiplicity="1" />
+          <End Role="Bookmarks" Type="Deano.Models.Store.Bookmarks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Bookmarks">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Forums_Users">
+          <End Role="Users" Type="Deano.Models.Store.Users" Multiplicity="1" />
+          <End Role="Forums" Type="Deano.Models.Store.Forums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Forums">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostPictures_Pictures">
+          <End Role="Pictures" Type="Deano.Models.Store.Pictures" Multiplicity="1" />
+          <End Role="PostPictures" Type="Deano.Models.Store.PostPictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pictures">
+              <PropertyRef Name="PictureId" />
+            </Principal>
+            <Dependent Role="PostPictures">
+              <PropertyRef Name="PictureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostPictures_Posts">
+          <End Role="Posts" Type="Deano.Models.Store.Posts" Multiplicity="1" />
+          <End Role="PostPictures" Type="Deano.Models.Store.PostPictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="PostPictures">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Threads">
+          <End Role="Threads" Type="Deano.Models.Store.Threads" Multiplicity="1" />
+          <End Role="Posts" Type="Deano.Models.Store.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Threads">
+              <PropertyRef Name="ThreadId" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="ThreadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Users">
+          <End Role="Users" Type="Deano.Models.Store.Users" Multiplicity="1" />
+          <End Role="Posts" Type="Deano.Models.Store.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportPictures_Pictures">
+          <End Role="Pictures" Type="Deano.Models.Store.Pictures" Multiplicity="1" />
+          <End Role="ReportPictures" Type="Deano.Models.Store.ReportPictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pictures">
+              <PropertyRef Name="PictureId" />
+            </Principal>
+            <Dependent Role="ReportPictures">
+              <PropertyRef Name="PictureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportPictures_Reports">
+          <End Role="Reports" Type="Deano.Models.Store.Reports" Multiplicity="1" />
+          <End Role="ReportPictures" Type="Deano.Models.Store.ReportPictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="ReportPictures">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_Users">
+          <End Role="Users" Type="Deano.Models.Store.Users" Multiplicity="1" />
+          <End Role="Reports" Type="Deano.Models.Store.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Threads_Forums">
+          <End Role="Forums" Type="Deano.Models.Store.Forums" Multiplicity="1" />
+          <End Role="Threads" Type="Deano.Models.Store.Threads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forums">
+              <PropertyRef Name="ForumId" />
+            </Principal>
+            <Dependent Role="Threads">
+              <PropertyRef Name="ForumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Threads_Users">
+          <End Role="Users" Type="Deano.Models.Store.Users" Multiplicity="1" />
+          <End Role="Threads" Type="Deano.Models.Store.Threads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Threads">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Deano.Models.Store.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Deano.Models.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Deano.Models" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Database" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="Users" EntityType="Deano.Models.User" />
+          <EntitySet Name="Roles" EntityType="Deano.Models.Role" />
+          <AssociationSet Name="FK_Users_Roles" Association="Deano.Models.FK_Users_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Forums" EntityType="Deano.Models.Forum" />
+          <EntitySet Name="Pictures" EntityType="Deano.Models.Picture" />
+          <EntitySet Name="PostPictures" EntityType="Deano.Models.PostPicture" />
+          <EntitySet Name="Posts" EntityType="Deano.Models.Post" />
+          <EntitySet Name="ReportPictures" EntityType="Deano.Models.ReportPicture" />
+          <EntitySet Name="Reports" EntityType="Deano.Models.Report" />
+          <EntitySet Name="Threads" EntityType="Deano.Models.Thread" />
+          <AssociationSet Name="FK_Forums_Users" Association="Deano.Models.FK_Forums_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Forum" EntitySet="Forums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Threads_Forums" Association="Deano.Models.FK_Threads_Forums">
+            <End Role="Forum" EntitySet="Forums" />
+            <End Role="Thread" EntitySet="Threads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostPictures_Pictures" Association="Deano.Models.FK_PostPictures_Pictures">
+            <End Role="Picture" EntitySet="Pictures" />
+            <End Role="PostPicture" EntitySet="PostPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportPictures_Pictures" Association="Deano.Models.FK_ReportPictures_Pictures">
+            <End Role="Picture" EntitySet="Pictures" />
+            <End Role="ReportPicture" EntitySet="ReportPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostPictures_Posts" Association="Deano.Models.FK_PostPictures_Posts">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="PostPicture" EntitySet="PostPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Threads" Association="Deano.Models.FK_Posts_Threads">
+            <End Role="Thread" EntitySet="Threads" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Users" Association="Deano.Models.FK_Posts_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportPictures_Reports" Association="Deano.Models.FK_ReportPictures_Reports">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="ReportPicture" EntitySet="ReportPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_Users" Association="Deano.Models.FK_Reports_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Report" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Threads_Users" Association="Deano.Models.FK_Threads_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Thread" EntitySet="Threads" />
+          </AssociationSet>
+          <EntitySet Name="Messages" EntityType="Deano.Models.Message" />
+          <EntitySet Name="Bookmarks" EntityType="Deano.Models.Bookmark" />
+          <AssociationSet Name="FK_Bookmarks_Posts" Association="Deano.Models.FK_Bookmarks_Posts">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Bookmark" EntitySet="Bookmarks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookmarks_Reports" Association="Deano.Models.FK_Bookmarks_Reports">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="Bookmark" EntitySet="Bookmarks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookmarks_Users" Association="Deano.Models.FK_Bookmarks_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Bookmark" EntitySet="Bookmarks" />
+          </AssociationSet>
+          <EntitySet Name="Settings" EntityType="Deano.Models.Setting" />
+          <EntitySet Name="MetaTags" EntityType="Deano.Models.MetaTag" />
+          <EntitySet Name="ArticleTags" EntityType="Deano.Models.ArticleTag" />
+          <EntitySet Name="Tags" EntityType="Deano.Models.Tag" />
+          <AssociationSet Name="FK_ArticleTags_Posts" Association="Deano.Models.FK_ArticleTags_Posts">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="ArticleTag" EntitySet="ArticleTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArticleTags_Reports" Association="Deano.Models.FK_ArticleTags_Reports">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="ArticleTag" EntitySet="ArticleTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArticleTags_Tags" Association="Deano.Models.FK_ArticleTags_Tags">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="ArticleTag" EntitySet="ArticleTags" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Handle" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="RoleId" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Deano.Models.FK_Users_Roles" FromRole="User" ToRole="Role" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <NavigationProperty Name="Forums" Relationship="Deano.Models.FK_Forums_Users" FromRole="User" ToRole="Forum" />
+          <NavigationProperty Name="Posts" Relationship="Deano.Models.FK_Posts_Users" FromRole="User" ToRole="Post" />
+          <NavigationProperty Name="Reports" Relationship="Deano.Models.FK_Reports_Users" FromRole="User" ToRole="Report" />
+          <NavigationProperty Name="Threads" Relationship="Deano.Models.FK_Threads_Users" FromRole="User" ToRole="Thread" />
+          <NavigationProperty Name="Bookmarks" Relationship="Deano.Models.FK_Bookmarks_Users" FromRole="User" ToRole="Bookmark" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Type="Int32" Name="RoleId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Access" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Deano.Models.FK_Users_Roles" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Users_Roles">
+          <End Type="Deano.Models.Role" Role="Role" Multiplicity="1" />
+          <End Type="Deano.Models.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Forum">
+          <Key>
+            <PropertyRef Name="ForumId" />
+          </Key>
+          <Property Type="Int32" Name="ForumId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Subject" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Tags" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Deano.Models.FK_Forums_Users" FromRole="Forum" ToRole="User" />
+          <NavigationProperty Name="Threads" Relationship="Deano.Models.FK_Threads_Forums" FromRole="Forum" ToRole="Thread" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="PictureId" />
+          </Key>
+          <Property Type="Int32" Name="PictureId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Path" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Tags" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PostPictures" Relationship="Deano.Models.FK_PostPictures_Pictures" FromRole="Picture" ToRole="PostPicture" />
+          <NavigationProperty Name="ReportPictures" Relationship="Deano.Models.FK_ReportPictures_Pictures" FromRole="Picture" ToRole="ReportPicture" />
+        </EntityType>
+        <EntityType Name="PostPicture">
+          <Key>
+            <PropertyRef Name="PostPictureId" />
+          </Key>
+          <Property Type="Int32" Name="PostPictureId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="PostId" Nullable="false" />
+          <Property Type="Int32" Name="PictureId" Nullable="false" />
+          <NavigationProperty Name="Picture" Relationship="Deano.Models.FK_PostPictures_Pictures" FromRole="PostPicture" ToRole="Picture" />
+          <NavigationProperty Name="Post" Relationship="Deano.Models.FK_PostPictures_Posts" FromRole="PostPicture" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Type="Int32" Name="PostId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Subject" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Body" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Tags" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="Int32" Name="ThreadId" Nullable="false" />
+          <NavigationProperty Name="PostPictures" Relationship="Deano.Models.FK_PostPictures_Posts" FromRole="Post" ToRole="PostPicture" />
+          <NavigationProperty Name="Thread" Relationship="Deano.Models.FK_Posts_Threads" FromRole="Post" ToRole="Thread" />
+          <NavigationProperty Name="User" Relationship="Deano.Models.FK_Posts_Users" FromRole="Post" ToRole="User" />
+          <NavigationProperty Name="Bookmarks" Relationship="Deano.Models.FK_Bookmarks_Posts" FromRole="Post" ToRole="Bookmark" />
+          <Property Type="Guid" Name="TemporaryId" Nullable="false" />
+          <NavigationProperty Name="ArticleTags" Relationship="Deano.Models.FK_ArticleTags_Posts" FromRole="Post" ToRole="ArticleTag" />
+        </EntityType>
+        <EntityType Name="ReportPicture">
+          <Key>
+            <PropertyRef Name="ReportPictureId" />
+          </Key>
+          <Property Type="Int32" Name="ReportPictureId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="ReportId" Nullable="false" />
+          <Property Type="Int32" Name="PictureId" Nullable="false" />
+          <NavigationProperty Name="Picture" Relationship="Deano.Models.FK_ReportPictures_Pictures" FromRole="ReportPicture" ToRole="Picture" />
+          <NavigationProperty Name="Report" Relationship="Deano.Models.FK_ReportPictures_Reports" FromRole="ReportPicture" ToRole="Report" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Type="Int32" Name="ReportId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Subject" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Body" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Tags" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <NavigationProperty Name="ReportPictures" Relationship="Deano.Models.FK_ReportPictures_Reports" FromRole="Report" ToRole="ReportPicture" />
+          <NavigationProperty Name="User" Relationship="Deano.Models.FK_Reports_Users" FromRole="Report" ToRole="User" />
+          <NavigationProperty Name="Bookmarks" Relationship="Deano.Models.FK_Bookmarks_Reports" FromRole="Report" ToRole="Bookmark" />
+          <Property Type="Guid" Name="TemporaryId" Nullable="false" />
+          <NavigationProperty Name="ArticleTags" Relationship="Deano.Models.FK_ArticleTags_Reports" FromRole="Report" ToRole="ArticleTag" />
+        </EntityType>
+        <EntityType Name="Thread">
+          <Key>
+            <PropertyRef Name="ThreadId" />
+          </Key>
+          <Property Type="Int32" Name="ThreadId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Subject" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Tags" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ForumId" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <NavigationProperty Name="Forum" Relationship="Deano.Models.FK_Threads_Forums" FromRole="Thread" ToRole="Forum" />
+          <NavigationProperty Name="Posts" Relationship="Deano.Models.FK_Posts_Threads" FromRole="Thread" ToRole="Post" />
+          <NavigationProperty Name="User" Relationship="Deano.Models.FK_Threads_Users" FromRole="Thread" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Forums_Users">
+          <End Type="Deano.Models.User" Role="User" Multiplicity="1" />
+          <End Type="Deano.Models.Forum" Role="Forum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Forum">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Threads_Forums">
+          <End Type="Deano.Models.Forum" Role="Forum" Multiplicity="1" />
+          <End Type="Deano.Models.Thread" Role="Thread" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forum">
+              <PropertyRef Name="ForumId" />
+            </Principal>
+            <Dependent Role="Thread">
+              <PropertyRef Name="ForumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostPictures_Pictures">
+          <End Type="Deano.Models.Picture" Role="Picture" Multiplicity="1" />
+          <End Type="Deano.Models.PostPicture" Role="PostPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Picture">
+              <PropertyRef Name="PictureId" />
+            </Principal>
+            <Dependent Role="PostPicture">
+              <PropertyRef Name="PictureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportPictures_Pictures">
+          <End Type="Deano.Models.Picture" Role="Picture" Multiplicity="1" />
+          <End Type="Deano.Models.ReportPicture" Role="ReportPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Picture">
+              <PropertyRef Name="PictureId" />
+            </Principal>
+            <Dependent Role="ReportPicture">
+              <PropertyRef Name="PictureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostPictures_Posts">
+          <End Type="Deano.Models.Post" Role="Post" Multiplicity="1" />
+          <End Type="Deano.Models.PostPicture" Role="PostPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="PostPicture">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Threads">
+          <End Type="Deano.Models.Thread" Role="Thread" Multiplicity="1" />
+          <End Type="Deano.Models.Post" Role="Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thread">
+              <PropertyRef Name="ThreadId" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="ThreadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Users">
+          <End Type="Deano.Models.User" Role="User" Multiplicity="1" />
+          <End Type="Deano.Models.Post" Role="Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportPictures_Reports">
+          <End Type="Deano.Models.Report" Role="Report" Multiplicity="1" />
+          <End Type="Deano.Models.ReportPicture" Role="ReportPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="ReportPicture">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_Users">
+          <End Type="Deano.Models.User" Role="User" Multiplicity="1" />
+          <End Type="Deano.Models.Report" Role="Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Threads_Users">
+          <End Type="Deano.Models.User" Role="User" Multiplicity="1" />
+          <End Type="Deano.Models.Thread" Role="Thread" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Thread">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Type="Int32" Name="MessageId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="DateTime" Name="MessageDate" Nullable="false" />
+          <Property Type="String" Name="FromEmail" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Type="String" Name="FromName" Nullable="true" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Subject" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Body" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" />
+          <Property Type="Int32" Name="NumberOfPeople" />
+          <Property Type="String" Name="NumberOfDays" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Catch" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FromPhone" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Bookmark">
+          <Key>
+            <PropertyRef Name="BookmarkId" />
+          </Key>
+          <Property Type="Int32" Name="BookmarkId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="PostId" />
+          <Property Type="Int32" Name="ReportId" />
+          <NavigationProperty Name="Post" Relationship="Deano.Models.FK_Bookmarks_Posts" FromRole="Bookmark" ToRole="Post" />
+          <NavigationProperty Name="Report" Relationship="Deano.Models.FK_Bookmarks_Reports" FromRole="Bookmark" ToRole="Report" />
+          <NavigationProperty Name="User" Relationship="Deano.Models.FK_Bookmarks_Users" FromRole="Bookmark" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Bookmarks_Posts">
+          <End Type="Deano.Models.Post" Role="Post" Multiplicity="0..1" />
+          <End Type="Deano.Models.Bookmark" Role="Bookmark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="Bookmark">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookmarks_Reports">
+          <End Type="Deano.Models.Report" Role="Report" Multiplicity="0..1" />
+          <End Type="Deano.Models.Bookmark" Role="Bookmark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="Bookmark">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookmarks_Users">
+          <End Type="Deano.Models.User" Role="User" Multiplicity="1" />
+          <End Type="Deano.Models.Bookmark" Role="Bookmark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Bookmark">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Type="Int32" Name="SettingId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Encrypted" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MetaTag">
+          <Key>
+            <PropertyRef Name="MetaTagId" />
+          </Key>
+          <Property Type="Int32" Name="MetaTagId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TypeId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArticleTag">
+          <Key>
+            <PropertyRef Name="ArticleTagId" />
+          </Key>
+          <Property Type="Int32" Name="ArticleTagId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="PostId" />
+          <Property Type="Int32" Name="ReportId" />
+          <Property Type="Int32" Name="TagId" Nullable="false" />
+          <NavigationProperty Name="Post" Relationship="Deano.Models.FK_ArticleTags_Posts" FromRole="ArticleTag" ToRole="Post" />
+          <NavigationProperty Name="Report" Relationship="Deano.Models.FK_ArticleTags_Reports" FromRole="ArticleTag" ToRole="Report" />
+          <NavigationProperty Name="Tag" Relationship="Deano.Models.FK_ArticleTags_Tags" FromRole="ArticleTag" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Type="Int32" Name="TagId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TagTypeId" Nullable="false" />
+          <NavigationProperty Name="ArticleTags" Relationship="Deano.Models.FK_ArticleTags_Tags" FromRole="Tag" ToRole="ArticleTag" />
+        </EntityType>
+        <Association Name="FK_ArticleTags_Posts">
+          <End Type="Deano.Models.Post" Role="Post" Multiplicity="0..1" />
+          <End Type="Deano.Models.ArticleTag" Role="ArticleTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="ArticleTag">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArticleTags_Reports">
+          <End Type="Deano.Models.Report" Role="Report" Multiplicity="0..1" />
+          <End Type="Deano.Models.ArticleTag" Role="ArticleTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="ArticleTag">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArticleTags_Tags">
+          <End Type="Deano.Models.Tag" Role="Tag" Multiplicity="1" />
+          <End Type="Deano.Models.ArticleTag" Role="ArticleTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="TagId" />
+            </Principal>
+            <Dependent Role="ArticleTag">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DeanoModelsStoreContainer" CdmEntityContainer="Database">
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="Deano.Models.User"><MappingFragment StoreEntitySet="Users">
+            <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="Username" ColumnName="Username" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="Handle" ColumnName="Handle" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Deano.Models.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Access" ColumnName="Access" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forums">
+            <EntityTypeMapping TypeName="Deano.Models.Forum">
+              <MappingFragment StoreEntitySet="Forums">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="ForumId" ColumnName="ForumId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pictures">
+            <EntityTypeMapping TypeName="Deano.Models.Picture">
+              <MappingFragment StoreEntitySet="Pictures">
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="PictureId" ColumnName="PictureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostPictures">
+            <EntityTypeMapping TypeName="Deano.Models.PostPicture">
+              <MappingFragment StoreEntitySet="PostPictures">
+                <ScalarProperty Name="PictureId" ColumnName="PictureId" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="PostPictureId" ColumnName="PostPictureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="Deano.Models.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="TemporaryId" ColumnName="TemporaryId" />
+                <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportPictures">
+            <EntityTypeMapping TypeName="Deano.Models.ReportPicture">
+              <MappingFragment StoreEntitySet="ReportPictures">
+                <ScalarProperty Name="PictureId" ColumnName="PictureId" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="ReportPictureId" ColumnName="ReportPictureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="Deano.Models.Report">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="TemporaryId" ColumnName="TemporaryId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Threads">
+            <EntityTypeMapping TypeName="Deano.Models.Thread">
+              <MappingFragment StoreEntitySet="Threads">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ForumId" ColumnName="ForumId" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="Deano.Models.Message">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="FromPhone" ColumnName="FromPhone" />
+                <ScalarProperty Name="Catch" ColumnName="Catch" />
+                <ScalarProperty Name="NumberOfDays" ColumnName="NumberOfDays" />
+                <ScalarProperty Name="NumberOfPeople" ColumnName="NumberOfPeople" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="Body" ColumnName="Message" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="FromName" ColumnName="FromName" />
+                <ScalarProperty Name="FromEmail" ColumnName="FromEmail" />
+                <ScalarProperty Name="MessageDate" ColumnName="MessageDate" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bookmarks">
+            <EntityTypeMapping TypeName="Deano.Models.Bookmark">
+              <MappingFragment StoreEntitySet="Bookmarks">
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BookmarkId" ColumnName="BookmarkId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="Deano.Models.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Encrypted" ColumnName="Encrypted" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetaTags">
+            <EntityTypeMapping TypeName="Deano.Models.MetaTag">
+              <MappingFragment StoreEntitySet="MetaTags">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MetaTagId" ColumnName="MetaTagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleTags">
+            <EntityTypeMapping TypeName="Deano.Models.ArticleTag">
+              <MappingFragment StoreEntitySet="ArticleTags">
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="ArticleTagId" ColumnName="ArticleTagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="Deano.Models.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="TagTypeId" ColumnName="TagTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Deanoedmx">
+        <EntityTypeShape EntityType="Deano.Models.User" Width="1.5" PointX="0.75" PointY="0.75" Height="1.787985026041667" IsExpanded="true" />
+        <EntityTypeShape EntityType="Deano.Models.Role" Width="1.5" PointX="0.75" PointY="4" Height="1.7879850260416674" />
+        <AssociationConnector Association="Deano.Models.FK_Users_Roles">
+          <ConnectorPoint PointX="1.5" PointY="5.7879850260416674" />
+          <ConnectorPoint PointX="1.5" PointY="6.0379850260416674" />
+          <ConnectorPoint PointX="1.5" PointY="6.0379850260416674" />
+          <ConnectorPoint PointX="1.5" PointY="4.4609993489583326" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Deano.Models.Forum" Width="1.5" PointX="3" PointY="5.625" Height="2.3648893229166656" />
+        <EntityTypeShape EntityType="Deano.Models.Picture" Width="1.5" PointX="7.5" PointY="7.25" Height="1.9802864583333326" />
+        <EntityTypeShape EntityType="Deano.Models.PostPicture" Width="1.5" PointX="9.75" PointY="2.25" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="Deano.Models.Post" Width="1.5" PointX="7.5" PointY="1.75" Height="2.941793619791667" />
+        <EntityTypeShape EntityType="Deano.Models.ReportPicture" Width="1.5" PointX="5.25" PointY="9" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="Deano.Models.Report" Width="1.5" PointX="3" PointY="8.75" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="Deano.Models.Thread" Width="1.5" PointX="5.25" PointY="3" Height="2.7494921874999996" />
+        <AssociationConnector Association="Deano.Models.FK_Forums_Users">
+          <ConnectorPoint PointX="2.25" PointY="1.7215231001069966" />
+          <ConnectorPoint PointX="3.75" PointY="1.7215231001069966" />
+          <ConnectorPoint PointX="3.75" PointY="5.625" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_Threads_Forums">
+          <ConnectorPoint PointX="4.5" PointY="6.8696912552083322" />
+          <ConnectorPoint PointX="6" PointY="6.8696912552083322" />
+          <ConnectorPoint PointX="6" PointY="5.7494921875" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_PostPictures_Pictures">
+          <ConnectorPoint PointX="9" PointY="8.828837890625" />
+          <ConnectorPoint PointX="9.90625" PointY="8.828837890625" />
+          <ConnectorPoint PointX="9.90625" PointY="4.2302864583333317" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_ReportPictures_Pictures">
+          <ConnectorPoint PointX="7.5" PointY="8.1249995000000013" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="8.1249995000000013" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="8.1249995000000013" />
+          <ConnectorPoint PointX="6" PointY="8.1249995000000013" />
+          <ConnectorPoint PointX="6" PointY="9" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_PostPictures_Posts">
+          <ConnectorPoint PointX="9" PointY="3.2401432291666659" />
+          <ConnectorPoint PointX="9.75" PointY="3.2401432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_Posts_Threads">
+          <ConnectorPoint PointX="6.75" PointY="4.1343489583333328" />
+          <ConnectorPoint PointX="7.5" PointY="4.1343489583333328" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_Posts_Users">
+          <ConnectorPoint PointX="2.25" PointY="2.34375" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="2.3437499999999996" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="2.34375" />
+          <ConnectorPoint PointX="7.5" PointY="2.34375" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_ReportPictures_Reports">
+          <ConnectorPoint PointX="4.5" PointY="9.9901432291666659" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="9.9901432291666659" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="9.9901432291666659" />
+          <ConnectorPoint PointX="5.25" PointY="9.9901432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_Reports_Users">
+          <ConnectorPoint PointX="2.25" PointY="4.4609993489583326" />
+          <ConnectorPoint PointX="2.625" PointY="4.8359993489583326" />
+          <ConnectorPoint PointX="2.625" PointY="10.317047526041666" />
+          <ConnectorPoint PointX="3" PointY="10.317047526041666" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_Threads_Users">
+          <ConnectorPoint PointX="2.25" PointY="3.6992471744791664" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="3.699247174479166" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="3.6992471744791664" />
+          <ConnectorPoint PointX="5.25" PointY="3.6992471744791664" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Deano.Models.Message" Width="1.5" PointX="7.375" PointY="10.75" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="Deano.Models.Bookmark" Width="1.5" PointX="10.125" PointY="6" Height="2.3648893229166674" />
+        <AssociationConnector Association="Deano.Models.FK_Bookmarks_Posts">
+          <ConnectorPoint PointX="9" PointY="4.7807421874999987" />
+          <ConnectorPoint PointX="9.8229166666666661" PointY="4.7807421874999978" />
+          <ConnectorPoint PointX="9.9895833333333339" PointY="4.7807421874999987" />
+          <ConnectorPoint PointX="11.303383541666667" PointY="4.7807421874999978" />
+          <ConnectorPoint PointX="11.470050208333335" PointY="4.7807421874999987" />
+          <ConnectorPoint PointX="11.5371109375" PointY="4.7807421874999987" />
+          <ConnectorPoint PointX="11.5371109375" PointY="6" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_Bookmarks_Reports">
+          <ConnectorPoint PointX="3.75" PointY="8.75" />
+          <ConnectorPoint PointX="3.75" PointY="8.2398893229166656" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="8.2398893229166656" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="8.2398893229166656" />
+          <ConnectorPoint PointX="7.25" PointY="8.2398893229166656" />
+          <ConnectorPoint PointX="7.25" PointY="7" />
+          <ConnectorPoint PointX="9.75" PointY="7" />
+          <ConnectorPoint PointX="9.75" PointY="7.1824446614583337" />
+          <ConnectorPoint PointX="9.8229166666666661" PointY="7.1824446614583328" />
+          <ConnectorPoint PointX="9.9895833333333339" PointY="7.1824446614583337" />
+          <ConnectorPoint PointX="10.125" PointY="7.1824446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_Bookmarks_Users">
+          <ConnectorPoint PointX="2.25" PointY="1.21875" />
+          <ConnectorPoint PointX="11.386716875000001" PointY="1.21875" />
+          <ConnectorPoint PointX="11.386716875000001" PointY="6" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Deano.Models.Setting" Width="1.5" PointX="10.375" PointY="9.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="Deano.Models.MetaTag" Width="1.5" PointX="12.375" PointY="0.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="Deano.Models.ArticleTag" Width="1.5" PointX="12.75" PointY="5.625" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="Deano.Models.Tag" Width="1.5" PointX="10.5" PointY="13.875" Height="1.7879850260416674" />
+        <AssociationConnector Association="Deano.Models.FK_ArticleTags_Posts">
+          <ConnectorPoint PointX="9" PointY="5.0559725520833325" />
+          <ConnectorPoint PointX="9.8229166666666661" PointY="5.0559725520833316" />
+          <ConnectorPoint PointX="9.9895833333333339" PointY="5.0559725520833325" />
+          <ConnectorPoint PointX="11.303383541666667" PointY="5.0559725520833316" />
+          <ConnectorPoint PointX="11.620444270833334" PointY="5.0559725520833325" />
+          <ConnectorPoint PointX="14.09375" PointY="5.0559725520833325" />
+          <ConnectorPoint PointX="14.09375" PointY="5.625" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_ArticleTags_Reports">
+          <ConnectorPoint PointX="4.5" PointY="10.968371140624999" />
+          <ConnectorPoint PointX="5" PointY="10.968371140624999" />
+          <ConnectorPoint PointX="5" PointY="8.75" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="8.75" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="8.75" />
+          <ConnectorPoint PointX="7.25" PointY="8.75" />
+          <ConnectorPoint PointX="7.25" PointY="9.5" />
+          <ConnectorPoint PointX="11.885416666666666" PointY="9.5" />
+          <ConnectorPoint PointX="12.052083333333334" PointY="9.5" />
+          <ConnectorPoint PointX="13.5" PointY="9.5" />
+          <ConnectorPoint PointX="13.5" PointY="7.9898893229166674" />
+        </AssociationConnector>
+        <AssociationConnector Association="Deano.Models.FK_ArticleTags_Tags">
+          <ConnectorPoint PointX="11.96875" PointY="13.875" />
+          <ConnectorPoint PointX="11.96875" PointY="5.78125" />
+          <ConnectorPoint PointX="12.75" PointY="5.78125" />
+        </AssociationConnector>
+        </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

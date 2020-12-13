@@ -1,0 +1,618 @@
+﻿/*
+Design by Metamorphosis Design
+http://www.metamorphozis.com
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+
+.watermark
+{
+	color: #666;
+}
+
+
+img
+{
+	border: 0px;
+}
+
+
+a
+{
+	color: Black;
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: underline;
+	color: #000000;
+}
+
+body
+{
+	background-color:  Black;
+		font-size: 75%;
+	font-family: Verdana, Tahoma, Arial, "Helvetica Neue" , Helvetica, Sans-Serif;
+	margin: 0;
+	padding: 0;
+}
+
+.page
+{
+}
+
+#header
+{
+	height: 165px;
+}
+
+#header h1
+{
+	font-weight: bold;
+	padding: 5px 0;
+	margin: 0;
+	color: #fff;
+	border: none;
+	line-height: 2em;
+	font-size: 32px !important;
+}
+
+#main
+{
+	background: #789059;
+	margin-bottom: 150px;
+	margin-top: 15px;
+	_height: 1px; /* only IE6 applies CSS properties starting with an underscore */
+	height: 800px;
+}
+
+#mainContent
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 1012px;
+}
+
+#walleyesContainer
+{
+	padding-top: 15px;
+	width: 800px;
+	float: left;
+}
+
+#walleyesTitle
+{
+	font-size: 12pt;
+	margin-left: 15px;
+	margin-bottom: 5px;
+}
+#walleyes
+{
+	background-color: #789059;
+	border: 6px solid  #B4BF6D; /*#ddd;*/
+	padding: 6px;
+	padding-top: 5px;
+	width: 700px;
+}
+
+#walleyesContent
+{
+	background-color: #eee;
+	width: 690px;
+	padding: 10px 0px 10px 10px;
+}
+
+#walleyesContainer
+{
+	padding-top: 15px;
+	width: 700px;
+	float: left;
+}
+
+#actionsContainer
+{
+	padding-top: 15px;
+	float: left;
+	margin-left:25px;
+}
+
+#actionsTitle
+{
+	font-size: 12pt;
+	margin-bottom: 5px;
+}
+#actions
+{
+	margin-left: 14px;
+	background-color: #789059;
+	border: 6px solid #B4BF6D; /*#ddd;*/
+	padding: 6px;
+	padding-top: 5px;
+	width: 248px;
+}
+
+#actionsContent
+{
+	background-color: #eee;
+	width: 239px;
+	padding: 10px 0px 10px 10px;
+}
+
+#footer
+{
+	color: #999;
+	padding: 10px 0;
+	text-align: center;
+	line-height: normal;
+	margin: 0;
+	font-size: .9em;
+}
+
+#catalog
+{
+	padding-top: 3px;
+}
+#pager
+{
+	width: auto;
+	text-align: center;
+	height: 35px;
+}
+
+#pager .page
+{
+	float: left;
+	background: url(images/menu.jpg) left top repeat-x;
+	height: 25px;
+	width: 25px;
+	margin: 10px 0px 0px 3px;
+}
+
+#pager .selectedPage
+{
+	float: left;
+	background: url(images/menu.jpg) left top repeat-x;
+	font-weight: bold;
+	height: 30px;
+	width: 35px;
+	padding-top: 5px;
+	margin: 0px 0px 0px 3px;
+	text-decoration: underline;
+}
+
+#pager .page:hover
+{
+	float: left;
+	background: url(images/menu.jpg) left top repeat-x;
+	font-weight: bold;
+	height: 30px;
+	width: 35px;
+	padding-top: 5px;
+	margin: 0px 0px 0px 3px;
+}
+
+
+#left
+{
+	width: 319px;
+	padding: 0px 0px 0px 0px;
+	margin: 0px;
+	float: left;
+	background: url(images/tit.png) left 28px repeat-x;
+}
+
+#left .list
+{
+	list-style: none;
+	padding-left: 31px;
+	padding-top: 5px;
+	margin: 0px;
+	display: block;
+	background: url(images/fish.png) 6px 4px no-repeat;
+}
+
+#center
+{
+	float: left;
+	padding: 0px 0px 0px 0px;
+	width: 631px;
+	background: transparent url(images/but_razd.jpg) no-repeat scroll right center;
+	margin: 0px 0px 0px 11px;
+	height: 30px;
+}
+
+#centerContent
+{
+	float: left;
+	padding: 0px 0px 0px 0px;
+	width: 631px;
+	margin: 0px 0px 0px 11px;
+	min-height: 400px;
+}
+
+#center3
+{
+	float: left;
+	padding: 0px 0px 0px 0px;
+	width: 961px;
+	background: url(images/tit.png) left 28px repeat-x;
+	margin: 0px 0px 0px 11px;
+	min-height: 400px;
+}
+
+#center2
+{
+	float: left;
+	padding: 14px 0px 0px 0px;
+	width: 631px;
+	background: url(images/tit.png) repeat-x;
+	background-position: 0px 0px;
+	margin: 0px 0px 0px 11px;
+	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	height: 28px;
+	border-bottom: 1px solid black;
+}
+
+#content2
+{
+	width: 631px;
+	float: right;
+}
+
+#accountContent
+{
+	width: 611px;
+	float: right;
+	margin-right: 10px;
+	padding: 0px 10px 0px 10px;
+}
+
+.text
+{
+	padding: 15px 4px 0px 7px;
+}
+
+.text2
+{
+	margin-top: 15px;
+	padding: 7px 4px 0px 7px;
+}
+
+.color
+{
+	color: #347818;
+}
+
+.editorLabel
+{
+	color: #347818;
+}
+
+.dot
+{
+	background: url(images/dot.gif) center repeat-x;
+	height: 20px;
+}
+
+.dat
+{
+	text-decoration: underline;
+}
+
+H1
+{
+	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	color: #354905;
+	padding-bottom: 30px;
+	padding-left: 7px;
+	padding-top: 5px;
+	text-align: center;
+}
+
+.label
+{
+	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: #354905;
+	padding-left: 7px;
+	padding-top: 5px;
+	text-align: right;
+	width: 150px;
+	float: left;
+}
+
+.field
+{
+	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding-left: 20px;
+	padding-top: 5px;
+	float: left;
+}
+
+input
+{
+	width: 125px;
+}
+
+textarea
+{
+}
+
+.checkbox
+{
+	background-color: transparent;
+	width: 20px;
+}
+
+
+.inputTableCell
+{
+	width: 160px;
+}
+
+.nameValue
+{
+	clear: both;
+}
+
+H2
+{
+	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	color: #354905;
+	padding-bottom: 28px;
+	padding-left: 7px;
+	padding-top: 5px;
+	text-align: center;
+}
+
+H3
+{
+	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	color: #354905;
+	padding-bottom: 35px;
+	padding-left: 7px;
+	padding-top: 5px;
+	text-align: center;
+}
+
+H4
+{
+	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 0px;
+	margin-top: 7px;
+	color: #354905;
+	padding-bottom: 5px;
+	text-align: center;
+	float: right;
+	width: 600px;
+}
+
+.read
+{
+	text-align: right;
+	padding-right: 0px;
+	padding-top: 4px;
+}
+.read_top
+{
+	text-align: right;
+	padding-right: 30px;
+	padding-top: 10px;
+}
+
+.right
+{
+	float: right;
+	width: 319px;
+	padding-right: 0px;
+	background: url(images/tit.png) left 28px repeat-x;
+}
+
+
+
+.right ul
+{
+	list-style: none;
+	padding-left: 0px;
+	padding-top: 0px;
+	margin: 0px;
+	display: block;
+	padding-bottom: 0px;
+}
+
+.right li
+{
+	padding-top: 5px;
+	background: url(images/fish.png) 6px 4px no-repeat;
+	padding-left: 36px;
+}
+
+
+
+
+#left2
+{
+	width: 319px;
+	padding: 0px 0px 0px 0px;
+	margin: 0px;
+	float: left;
+}
+
+.panelBarHeader
+{
+	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	padding-left: 5px;
+	padding-right: 20px;
+	padding-top: 0px;
+	color: #354905;
+	padding-bottom: 3px;
+}
+.panelBarItem
+{
+	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	padding-top: 5px;
+	text-align: left;
+	background-color: #354905;
+	background: url(images/tit.png) repeat-x;
+}
+
+.panelBarSubItem
+{
+	padding-left: 55px;
+	padding: 2px 0px 2px 55px;
+	text-align: left;
+	font-size: 14px;
+	text-decoration: underline;
+}
+
+.SearchText
+{
+	width: 220px;
+	margin-bottom: 1px;
+}
+
+.commands
+{
+	margin-top: 5px;
+}
+
+.title
+{
+	text-align: center;
+	color: #354905;
+	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: normal;
+	margin-top: 5px;
+}
+
+.post
+{
+	padding: 0px 4px 10px 7px;
+	border-bottom: 1px solid black;
+	margin-bottom: 10px;
+}
+
+.thread
+{
+	padding: 7px 4px 10px 7px;
+	height: 40px;
+	border-bottom: 1px solid black;
+	margin-bottom: 10px;
+}
+
+.threadTitle
+{
+	color: #354905;
+	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.threadAuthor
+{
+	color: #354905;
+	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin-left: 10px;
+}
+#makeMeScrollable
+{
+	width: 600px;
+	height: 330px;
+	position: relative;
+}
+
+#makeMeScrollable div.scrollableArea img
+{
+	position: relative;
+	float: left;
+	margin: 0;
+	padding: 0; /* If you don't want the images in the scroller to be selectable, try the following 			   block of code. It's just a nice feature that prevent the images from 			   accidentally becoming selected/inverted when the user interacts with the scroller. */
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+
+#menu
+{
+	position: relative;
+	margin: 0;
+	height: 50px;
+	width: 700px;
+	float: right;
+}
+
+#menu .button
+{
+	float: left;
+	width: 100px;
+	height: 27px;
+	padding-top: 3px;
+	text-align: center;
+	margin-top: 10px;
+	font-size: 14pt;
+	text-decoration: none;
+	background: url(images/deanobutton.png);
+}
+
+
+#menu .button:hover
+{
+	float: left;
+	width: 110px;
+	margin-left:-10px;
+	height: 30px;
+	padding-top: 3px;
+	margin-top: 8px;
+	text-align: center;
+	font-size: 12pt;
+	text-decoration: underline;
+	background: url(images/deanobuttonhover.png);
+}
+
+.button a
+{
+	text-align: center;
+	color: white;
+}
+
+.button a:hover
+{
+	text-align: center;
+}
+
+div#title
+{
+	color: black;
+	background: white;
+	padding: 0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	width: 1000px;
+	height: 150px;
+	border: 6px solid #838A57; /*#ddd;*/
+}

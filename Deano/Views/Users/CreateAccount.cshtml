@@ -1,0 +1,105 @@
+﻿@model Deano.Models.Prototypes.Users.User
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.tmpl.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/validation.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/response.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    var responseCreateAccount = null;
+
+    function onBeginCreateAccount(e) {
+        var v = $('#frmCreateAccount').validate();
+        responseCreateAccount.onBegin(e, 'responseCreateAccount');
+    }
+
+    function onSuccessCreateAccount(e) {
+        if (e.Success == true) {
+            loadMemberIndex();
+        }
+        else {
+            responseCreateAccount.onSuccess(e, null);
+        }
+        $('html').prop('scrollTop', 0);
+    }
+
+    function onSubmit() {
+        var v = $('#frmCreateAccount').valid();
+        if (v == true || v == 1) {
+            $('#frmCreateAccount').trigger('submit');
+        }
+    }
+
+    $(function () {
+        $('#accountPassword').rules("add", { minlength: 6,
+            messages: {
+                minlength: "Password must contain at least 6 characters."
+            }
+        });
+
+        $('#accountUsername').rules("add", { email: true,
+            messages: {
+                email: "Please enter a valid email address."
+            }
+        });
+
+        responseCreateAccount = new jsonResponse('responseCreateAccount');
+        Validation.markRequiredFields('#frmCreateAccount');
+
+        $("input").blur(function () {
+            var txt = $(this).val();
+            $(this).val(txt);
+            $(this).valid();
+        });
+
+
+        $('#Handle').rules("add", {  minlength: 6,
+            messages: {
+                minlength: "Screen Name must contain at least 6 characters."
+            }
+        });
+    });
+ 
+</script>
+@using (Ajax.BeginForm("CreateAccount", "Users", new { userId = Model.UserId }, new AjaxOptions() { HttpMethod = "Post", OnBegin = "onBeginCreateAccount", OnSuccess = "onSuccessCreateAccount", OnComplete = "responseCreateAccount.onComplete" }, new { id = "frmCreateAccount" }))
+{
+    <div   id="walleyesTitle">
+        Create an Account</div>
+    <div id="walleyesContent">
+        <div id="responseCreateAccount">
+        </div>
+        <div class="nameValue">
+            <div class="label">
+                Email Address</div>
+            <div class="field">
+                @Html.TextBoxFor(m => m.Username, new { id = "accountUsername", @class = "credentials requiredField" })
+                @Html.ValidationMessageFor(m => m.Username)</div>
+        </div>
+        <div class="nameValue">
+            <div class="label">
+                Password</div>
+            <div class="field">
+                @Html.PasswordFor(m => m.Password, new { id = "accountPassword", @class = "credentials requiredField" })
+                @Html.ValidationMessageFor(m => m.Password)</div>
+        </div>
+        <div class="nameValue">
+            <div class="label">
+                Verify Password</div>
+            <div class="field">
+                @Html.PasswordFor(m => m.VerifiedPassword, new { @class = "credentials requiredField" })
+                @Html.ValidationMessageFor(m => m.VerifiedPassword)</div>
+        </div>
+        <div class="nameValue">
+            <div class="label">
+                Screen Name</div>
+            <div class="field">
+                @Html.TextBoxFor(m => m.Handle, new { @class = "credentials requiredField" })
+                @Html.ValidationMessageFor(m => m.Handle)</div>
+        </div>
+        <div style="clear: both" />
+        <div style="margin-top: 10px; width: 150px" class="buttonMap">
+            <a style="text-decoration: underline" onclick="onSubmit()" href="javascript:void(0)">
+                Register</a></div>
+        <div style="clear: both" />
+    </div>
+    <div style="clear: both" />
+}

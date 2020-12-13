@@ -1,0 +1,39 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnHome').removeClass('button');
+        $('#btnHome').addClass('buttonSelected');
+    });
+</script>
+@Html.Partial("Friends")
+<div id="walleyesContainer">
+    <div id="walleyes">
+        <div id="walleyesTitle">
+            Walleyes on the Chip...
+        </div>
+        <div id="walleyesContent">
+            @Html.Partial("Deano")
+        </div>
+    </div>
+</div>
+<div id="walleyesContainer">
+    <div id="walleyes">
+        <div id="walleyesTitle">
+            Current Fishing Guide Rates
+        </div>
+        <div id="walleyesContent">
+            @Html.Partial("Rates")
+        </div>
+    </div>
+</div>
+<div style="clear: both">
+</div>
+<div>
+    <div style="float: left; margin-left: 80px; margin-top: 20px">
+        <img height="170px" src="../../Content/images/deano2.jpg" />
+    </div>
+    <div style="float: left; margin-left: 60px; margin-top: 20px">
+        <img height="170px" src="../../Content/images/deano3.jpg" />
+    </div>
+</div>
+<div style="clear: both">
+</div>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="@(ViewBag.Description)">
+    <meta name="keywords" content="@(ViewBag.Keyword)">
+    <link href="@Url.Content("~/Content/Maps.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/2011.3.1306/jquery-1.6.4.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.tmpl.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.tinywatermark-2.1.0.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/response.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/layout.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/home.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/catalog.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/validation.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/MicrosoftAjax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/MicrosoftMvcAjax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/MicrosoftMvcValidation.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.lightbox-0.5.js")" type="text/javascript"></script>
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/base/jquery-ui.css")"
+        type="text/css" media="all" />
+    <link href="@Url.Content("~/Content/jquery.lightbox-0.5.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/jquery.lightbox-0.5.css")" media="screen" />
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxqLe_Snn9XWaJy3k8IWya3Br8q6B1Jt0&sensor=false"></script>
+    @(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.transparent.css").Combined(true).Compress(true)))
+    <style type="text/css">
+        /* jQuery lightBox plugin - Gallery style */
+        .gallery
+        {
+            width: 520px;
+            padding: 0px 0px 0px 0px;
+            margin-left: -40px;
+        }
+        .gallery ul
+        {
+            list-style: none;
+        }
+        .gallery ul li
+        {
+            display: inline;
+        }
+        .gallery ul img
+        {
+            border: 5px solid #3e3e3e;
+            border-width: 5px 5px 5px;
+        }
+        .gallery ul a:hover img
+        {
+            border: 5px solid #fff;
+            border-width: 5px 5px 5px;
+            color: #fff;
+        }
+        .gallery ul a:hover
+        {
+            color: #fff;
+        }
+    </style>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-31133450-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+</script>
+</head>
+<body>
+
+
+    <script type="text/javascript">
+        var watermark = 'Enter search text';
+        $.ajaxSetup({
+            cache: false
+        });
+
+        $(document).ready(function () {
+            $(".SearchText").blur(function () {
+                var txt = $(this).val();
+                Validation.clearErrors('#txtSearch');
+            });
+
+            var tags = $.parseJSON('@(ViewBag.RecentTags)');
+            $("#recentTagTemplate").tmpl(tags).appendTo('#recentTags');
+
+            $('.SearchText').watermark('watermark', watermark);
+            $('.SearchText').addClass('watermark');
+        });
+
+        function login() {
+            $('#Username').rules("add", { required: true, email: true,
+                messages: {
+                    required: 'Username is required.',
+                    email: 'Username is not valid.'
+                }
+            });
+
+            $('#Password').rules("add", { required: true,
+                messages: {
+                    required: 'Password is required.'
+                }
+            });
+            $('#Username').validate();
+            $('#Password').validate();
+            var path = '@Url.Content("/Users/LogIn")';
+            var valid = $('#frmLogIn').valid();
+
+            if (valid == true) {
+                var username = $('#Username').val();
+                var password = $('#Password').val();
+                var values = {
+                    password: password,
+                    username: username
+                };
+                $.ajax({ url: path, data: values, async: true, cache: false, dataType: "json", success: loginResult });
+            }
+        }
+
+        var currentButton = '';
+
+        function loginResult(results) {
+            var success = results.Success;
+            var path = '@Url.Content("/Users/Header")';
+            if (success == true) {
+                $('#failed').hide();
+                currentButton = $('.buttonSelected').attr('id');
+                Layout.RefreshPanel(path, '#header', SetCurrentMenuButton);
+                $('.secured').show();
+                $('.addFavorite').show();
+                var role = '@(ViewBag.Role)';
+                if (results.Role == "Admin") {
+                    $('.securedAdmin').show();
+                }
+            }
+            else {
+                $('#failed').show();
+            }
+        }
+
+        function SetCurrentMenuButton() {
+            $('#' + currentButton).removeClass('button');
+            $('#' + currentButton).addClass('buttonSelected');
+        }
+
+        function logout() {
+            currentButton = $('.buttonSelected').attr('id');
+            var path = '@Url.Content("/Users/LogOut")';
+            $.ajax({ url: path, async: true, cache: false, dataType: "json", success: logoutResult });
+        }
+
+        function logoutResult(results) {
+            var success = results.Success;
+            window.location = "/Home/Index";
+        }
+
+    </script>
+    <script id="pagerTemplate" type="text/x-jquery-tmpl"> 
+   {{each Pages}}
+    {{if Visible==true}}
+        {{if Selected==true}}
+            <div class="selectedPage">
+            <div>
+                <a onclick="GetCatalogData('${Value}')" href="javascript:void(0)">${Name}</a> 
+                 </div>
+       </div>
+        {{else}}
+            <div class="page">
+            <div>
+                <a onclick="GetCatalogData('${Value}')" href="javascript:void(0)">${Name}</a> 
+            </div>
+             </div>
+       {{/if}}
+    {{/if}}
+   {{/each}}
+    </script>
+    <script id="recentTagTemplate" type="text/x-jquery-tmpl"> 
+    {{if TypeId==1}}
+    <div style="float:left; margin-left:3px; margin-right:3px"><a href="/fish-forums/chippewa-flowage-hayward?search=${Name}">${Name}</a></div>
+     {{/if}} 
+    {{if TypeId==2}}
+    <div style="float:left; margin-left:3px; margin-right:3px"><a href="/fish-reports/chippewa-flowage-hayward?search=${Name}">${Name}</a></div>
+     {{/if}} 
+    </script>
+    <script id="forumTagTemplate" type="text/x-jquery-tmpl"> 
+    <div style="float:left; margin-left:3px; margin-right:3px"><a href="javascript:void(0)" onclick="loadPosts(-1,'${$data}')">${$data}</a></div>
+    </script>
+    <script id="forumTemplate" type="text/x-jquery-tmpl"> 
+<div class="commands">
+    <div style="width:120px;" onclick="loadCreateThread(-1,${ForumId})" class="buttonMap">
+        Create Thread</div>
+        <div style="clear:both"/>
+</div>
+<div class="text" style="height: 20px; border-bottom: 0px solid black">
+    <div style="float: left">
+        <span class="color">Threads in ${Subject}</span>
+    </div>
+    <div style="float: right">
+        <div class="color" style="float: left; text-align: left">
+            # of Posts</div>
+        <div class="color" style="text-align: left; margin-left: 10px; width: 250px; float: left">
+            Last Post By</div>
+    </div>
+</div>
+{{each Threads}} 
+<div class="thread">
+    <div style="float: left">
+        <div class="threadTitle">
+            <a href="javascript:void(0)" onclick="loadPosts(${ThreadId})">${Subject}</a></div>
+        <div class="threadAuthor">
+             ${CreatedBy}</div>
+    </div>
+    <div style="float: right">
+        <div style="float: left; width: 60px; text-align: center">
+           ${Total}</div>
+        <div class="threadAuthor"  style="text-align: left; margin-left: 10px; width: 250px; float: left">
+            ${EditedBy}</div>
+    </div>
+</div>
+{{/each}}
+    </script>
+    <script id="threadTemplate" type="text/x-jquery-tmpl"> 
+<div class="commands"/>
+{{each Posts}} 
+<div class="post">
+<div>
+    <span class="color">${Subject}</span></div>
+    <div style="margin-left:10px">
+    <span class="color">by ${CreatedBy} on ${CreatedDate}</span></div>
+   <div class="text">${Body}</div>   
+     <div class="text">Tags:${Tags}</div>  
+   <div> 
+   <div id="gallery${PostId}" class="gallery">  
+   <ul>
+{{each Images}} 
+<li>
+<a href="${Path}">
+<img src="${GalleryPath}" height="50px" alt="${Tags}"/>
+</a>
+</li>
+{{/each}}
+</ul>
+   </div>
+   </div>
+<div class="commands">
+    <div style="float:left"  type="button" onclick="loadCreatePost(-1,${ThreadId})" class="buttonMap">
+        Reply</div>
+        {{if AllowEdit==true}}
+            <div style="display:none" class="buttonMap" onclick="loadCreatePost(${PostId},${ThreadId})">Edit</div> 
+      {{else}}
+    <div style="float:left"  class="buttonMap" onclick="loadThreads(${ForumId})">
+        Back</div>
+        {{if Favorite==true}}
+         <img style="float:left;margin-left:5px;" src="/content/images/deanofavorite.png"/>
+        {{else}}
+        
+        {{if AllowBookmark==true}}
+        <div class="addFavorite">
+         <img style="float:left;margin-left:5px;" src="/content/images/deanofavorite.png"/>
+            <a  style="float:left;margin-top:7px" href="javascript:void(0)" onclick="markPost(${PostId},this)">Add to Favorites</a> 
+             <input type="hidden" class="marked" value="${Favorite}"/>
+ </div>
+   {{else}}
+          <div style="display:none" class="addFavorite">
+         <img style="float:left;margin-left:5px;" src="/content/images/deanofavorite.png"/>
+            <a  style="float:left;margin-top:7px" href="javascript:void(0)" onclick="markPost(${PostId},this)">Add to Favorites</a> 
+             <input type="hidden" class="marked" value="${Favorite}"/>
+ </div>
+        {{/if}} 
+        {{/if}} 
+        {{/if}} 
+ </div>
+<div style="clear:both"/>
+</div>
+{{/each}}
+    </script>
+    <script id="reportTagTemplate" type="text/x-jquery-tmpl"> 
+    <div style="float:left; margin-left:3px; margin-right:3px"><a href="javascript:void(0)" onclick="loadReports('${$data}',-1,-1)">${$data}</a></div>
+    </script>
+    <script id="reportTemplate" type="text/x-jquery-tmpl"> 
+<div class="commands"/>
+{{each Reports}} 
+<div class="post">
+<div>
+    <span class="color">${Subject}</span></div>
+<div style="margin-left:10px">
+    <span class="color">by ${CreatedBy} on ${CreatedDate}</span></div>
+   <div class="text">${Body}</div>  
+     <div class="text">Tags:${Tags}</div>  
+    <div>   
+   <div id="gallery${ReportId}" class="gallery">  
+   <ul>
+{{each Images}} 
+<li>
+<a href="${Path}">
+<img src="${GalleryPath}" height="50px" alt="${Tags}"/>
+</a>
+</li>
+{{/each}}
+</ul>
+   </div>
+   </div>
+<div class="commands">
+        <div style="margin-top:10px;">
+      {{if Favorite==true}}
+        <img style="float:left;margin-left:5px;" src="/content/images/deanofavorite.png"/>
+        {{else}}
+        
+        {{if AllowBookmark==true}}
+        <div class="addFavorite">
+        <img style="float:left" src="/content/images/deanofavorite.png"/>
+            <a  style="float:left;margin-top:7px" href="javascript:void(0)" onclick="markReport(${ReportId},this)">Add to Favorites</a> 
+         <input type="hidden" class="marked" value="${Favorite}"/>
+         </div>
+           {{else}}
+                <div class="addFavorite" style="display:none">
+        <img style="float:left" src="/content/images/deanofavorite.png"/>
+            <a  style="float:left;margin-top:7px" href="javascript:void(0)" onclick="markReport(${ReportId},this)">Add to Favorites</a> 
+         <input type="hidden" class="marked" value="${Favorite}"/>
+         </div>
+
+        {{/if}} 
+        {{/if}} 
+         </div> </div>
+<div style="clear:both"/>
+</div>
+{{/each}}
+    </script>
+    <script id="albumTagTemplate" type="text/x-jquery-tmpl"> 
+    <div style="float:left; margin-left:3px; margin-right:3px"><a href="javascript:void(0)" onclick="loadPhotos(-1,'${$data}')">${$data}</a></div>
+    </script>
+    <script id="albumTemplate" type="text/x-jquery-tmpl"> 
+     <div id="albumGallery" style="height:auto;width:720px;" class="gallery">  
+   <ul>
+{{each Photos}} 
+<li>
+<a href="${Image}">
+<img style=" margin:2px 3px 2px 0px" width="96px" src="${Thumbnail}" alt="${Title}" id="${PhotoId}" />
+</a>
+</li>
+{{/each}}
+</ul>
+<div style="clear:both"></div>
+   </div>
+    </script>
+    <script id="topicTemplate" type="text/x-jquery-tmpl">     
+            <div class="panelBarSubItem">
+                <a href="javascript:void(0)" onclick="loadThreads(${ForumId})">${Subject}</a></div>
+    </script>
+    <script id="reportTopicTemplate" type="text/x-jquery-tmpl">     
+            <div class="panelBarSubItem">
+                <a href="javascript:void(0)" onclick="loadReports(' ', ${YearId}, ${MonthId})">${Name}</a></div>
+    </script>
+    <script id="albumTopicTemplate" type="text/x-jquery-tmpl">     
+            <div class="panelBarSubItem">
+                <a href="javascript:void(0)" onclick="loadPhotos('${Title}')">${Title}</a></div>
+    </script>
+    <script id="jsonResponseLayout" type="text/x-jquery-tmpl">
+<div id="jsonResponse${Container}">
+    <div id="jsonSummary${Container}">
+    </div>
+</div>
+<div id="progress${Container}" style="display: none;">
+    <img alt="loading" src="../../../../Content/2011.3.1306/Transparent/loading.gif" />
+</div>
+    </script>
+    <script id="jsonResponse" type="text/x-jquery-tmpl">
+{{if Display==true}}
+<div class="t-in" style="margin: 6px 10px 10px 0px; padding: 0px 0px 10px 0px; font-weight: bold;
+    border-style: solid; border-width:2px; border-color: #2E7821; background-color: Yellow; color: black">
+    <div title="Click to close" onclick="javascript:Response.onClose('${Container}')"
+        style="margin-left: 25px; margin-top: 10px">
+        <table style="border: 0px none">
+            {{each Messages}} {{if Display==true}}
+            <tr style="border: 0px none">
+                {{if Type==0}}
+                <td style="border: 0px none">
+                    <img alt="Info" style="border: 0px none; margin-right: 5px" src="/Content/Images/info.png" />
+                </td>
+                {{/if}} {{if Type==2}}
+                <td style="border: 0px none">
+                    <img alt="Debug" style="border: 0px none; margin-right: 5px" src="/Content/Images/debug.png" />
+                </td>
+                {{/if}}{{if Type==3}}
+                <td style="border: 0px none">
+                    <img alt="Warning" style="border: 0px none; margin-right: 5px" src="/Content/Images/warning.png" />
+                </td>
+                {{/if}}{{if Type==4}}
+                <td style="border: 0px none">
+                    <img alt="Error" style="border: 0px none; margin-right: 5px" src="/Content/Images/error.png" />
+                </td>
+                {{/if}}
+                <td style="border: 0px none">
+                    ${Text}
+                </td>
+            </tr>
+            {{/if}} {{/each}}
+        </table>
+    </div>
+</div>
+{{/if}}
+    </script>
+    <div class="page">
+        @Html.Partial("Header")
+        <div id="main">
+            <div id="mainContent">
+                @RenderBody()
+                <div style="clear:both"></div>
+            </div>
+        </div>
+        <div style="background: black; height: 130px;">
+            <div id="footer" style="">
+                <a href="/Home/fishing-guide-home">Home</a> | <a href="/Home/fishing-guide-rates">Guide Rates</a> | <a href="/Home/fishing-guide-directions">Directions</a> | <a href="/fish-reports/chippewa-flowage-hayward">
+                    Fish Reports</a> | <a href="/fish-forums/chippewa-flowage-hayward">Fishing Forums</a> | <a href="/fish-photos/chippewa-flowage-hayward">Fishing Photos</a>
+                | <a href="/Home/fishing-guide-request">Contact</a> | <a href="/fish-reports/archive-report">Report
+                    Archive</a> | <a href="/fish-forums/archive-post">Post Archive</a>
+            </div>
+        </div>
+    </div>
+    @Html.Telerik().ScriptRegistrar().jQuery(false).DefaultGroup(group =>
+                     {
+                         group.Add("telerik.common.js");
+                         group.Add("telerik.window.min.js");
+                         group.Add("telerik.editor.min.js");
+                         group.Add("telerik.timepicker.min.js");
+                         group.Add("telerik.datepicker.min.js").Add("telerik.calendar.min.js");
+                     })
+</body>
+</html>

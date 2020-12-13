@@ -1,0 +1,55 @@
+﻿@model  IEnumerable<Deano.Models.Prototypes.Users.Post>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="walleyesContainer">
+    <div id="walleyes">
+        <div id="walleyesTitle">
+            Post Archive</div>
+        <div id="walleyesContent">
+            <div>
+                <div id="accountContent">
+                    <div id="catalog">
+                        @foreach (Deano.Models.Prototypes.Users.Post report in Model)
+                        {
+                            <div class="post">
+                                <div>
+                                    <span class="color">@report.Subject</span></div>
+                                <div style="margin-left: 10px">
+                                    <span class="color">by @report.CreatedBy on @report.CreatedDate</span></div>
+                                <div class="text">
+                                    @report.Body</div>
+                                <div class="text">
+                                    Tags:@report.Tags</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div id="accountContent2">
+                </div>
+            </div>
+            <div style="clear: both">
+                <img src="images/spaser.gif" alt="" width="1" height="1" /></div>
+        </div>
+    </div>
+</div>
+@Html.Partial("Friends")
+@*<div style="width: 100%; padding-top: 20px">
+    <div style="width: 800px; margin-left: auto; margin-right: auto; background: white">
+        <div style="margin-left: 10px; padding-top: 10px">
+            <span class="color">@Model.Subject</span></div>
+        <div style="margin-left: 10px">
+            <span class="color">by @Model.CreatedBy on @Model.CreatedDate</span></div>
+        <div class="text">@Model.Body</div>
+        <div style="margin-top: 20px; padding-bottom: 20px">
+            <div style="margin-left: 50px; float: left">
+                <a href="/Forums/PostArchive/@(ViewBag.PreviousPost)">Previous</a>
+            </div>
+            <div style="margin-right: 50px; float: right">
+                <a href="/Forums/PostArchive/@(ViewBag.NextPost)">Next</a>
+            </div>
+            <div style="clear: both">
+            </div>
+        </div>
+    </div>
+</div>*@

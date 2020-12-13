@@ -1,0 +1,55 @@
+﻿@model  Deano.Models.Prototypes.Users.Forum
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.tmpl.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/validation.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/response.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    var responseForumDetails = null;
+
+    function onBeginForumDetails(e) {
+        var v = $('#frmDetails').validate();
+        responseForumDetails.onBegin(e, 'responseForumDetails');
+    }
+
+    function onSuccessForumDetails(e) {
+        if (e.Success == true) {
+            responseForumDetails.onSuccess(e);
+            unloadCreateForum();
+            GetActionData('/Forums/_Index', '#topics', '#topicTemplate');
+        }
+        else {
+            responseForumDetails.onSuccess(e);
+        }
+
+        $('html').prop('scrollTop', 0);
+    }
+
+    $(function () {
+        responseForumDetails = new jsonResponse('responseForumDetails');
+        $('#ForumId').rules('remove');
+
+        $('#btnSave').click(function () {
+            $('#frmDetails').trigger('submit');
+        });
+    }
+    );
+</script>
+@using (Ajax.BeginForm("ForumDetails", "Forums", null, new AjaxOptions() { HttpMethod = "Post", OnBegin = "onBeginForumDetails", OnSuccess = "onSuccessForumDetails", OnComplete = "responseForumDetails.onComplete" }, new { id = "frmDetails" }))
+{
+    @Html.HiddenFor(m => m.ForumId)
+    <div class="title">
+        Create Topic</div>
+    <div class="editorLabel">
+        @Html.LabelFor(m => m.Subject)</div>
+    <div class="editorField">
+        @Html.EditorFor(m => m.Subject) 
+        @Html.ValidationMessageFor(m => m.Subject)
+    </div>
+    <div class="commands">
+        <div id="btnSave" class="buttonMap">
+            Save</div>
+        <div class="buttonMap" onclick="unloadCreateForum()">
+            Cancel</div>
+    </div>
+}

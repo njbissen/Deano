@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4048C90E-E86D-46DB-9BB2-B186E99FE9C3}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Deano</RootNamespace>
+    <AssemblyName>Deano</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Telerik.Web.Mvc">
+      <HintPath>..\lib\Telerik\Telerik.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Areas\Accounts\AccountsAreaRegistration.cs" />
+    <Compile Include="Areas\Accounts\Controllers\MemberController.cs" />
+    <Compile Include="Controllers\AlbumsController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ForumsController.cs" />
+    <Compile Include="Controllers\FishReportsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\2011.3.1306\telerik.common.min.css" />
+    <Content Include="Content\2011.3.1306\telerik.default.min.css" />
+    <Content Include="Content\2011.3.1306\telerik.telerik.min.css" />
+    <Content Include="Content\2011.3.1306\telerik.transparent.min.css" />
+    <Content Include="Content\2011.3.1306\Transparent\active.png" />
+    <Content Include="Content\2011.3.1306\Transparent\editor.png" />
+    <Content Include="Content\2011.3.1306\Transparent\gradient.png" />
+    <Content Include="Content\2011.3.1306\Transparent\group.png" />
+    <Content Include="Content\2011.3.1306\Transparent\hover.png" />
+    <Content Include="Content\2011.3.1306\Transparent\imagebrowser.png" />
+    <Content Include="Content\2011.3.1306\Transparent\loading.gif" />
+    <Content Include="Content\2011.3.1306\Transparent\selected.png" />
+    <Content Include="Content\2011.3.1306\Transparent\slider-h.gif" />
+    <Content Include="Content\2011.3.1306\Transparent\slider-v.gif" />
+    <Content Include="Content\2011.3.1306\Transparent\sprite-vertical.png" />
+    <Content Include="Content\2011.3.1306\Transparent\sprite.png" />
+    <Content Include="Content\2011.3.1306\Transparent\toolbar.png" />
+    <Content Include="Content\2011.3.1306\Transparent\widget.png" />
+    <Content Include="Content\images\deano2.JPG" />
+    <Content Include="Content\images\deano3.JPG" />
+    <Content Include="Content\images\DeanoButtonBig.png" />
+    <Content Include="Content\images\DeanoButtonBigHover.png" />
+    <Content Include="Content\images\DeanoFavorite.png" />
+    <Content Include="Content\images\lightbox-blank.gif" />
+    <Content Include="Content\images\lightbox-btn-close.gif" />
+    <Content Include="Content\images\lightbox-btn-next.gif" />
+    <Content Include="Content\images\lightbox-btn-prev.gif" />
+    <Content Include="Content\images\lightbox-ico-loading.gif" />
+    <Content Include="Content\images\warning.png" />
+    <Content Include="Content\jquery.lightbox-0.5.css" />
+    <Content Include="Content\SiteBlue.css" />
+    <Content Include="Content\SiteBlack.css" />
+    <Content Include="Content\SiteTan.css" />
+    <Content Include="Content\images\DeanoButton.png" />
+    <Content Include="Content\images\DeanoButtonHover.png" />
+    <Content Include="Content\images\DeanoGradient.png" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\images\deano.jpg" />
+    <Content Include="Content\images\siskos.jpg" />
+    <Content Include="Content\slideshow.css" />
+    <Content Include="Content\images\arrow_left.gif" />
+    <Content Include="Content\images\arrow_left.png" />
+    <Content Include="Content\images\arrow_right.gif" />
+    <Content Include="Content\images\arrow_right.png" />
+    <Content Include="Content\images\bg.gif" />
+    <Content Include="Content\images\big_transparent.gif" />
+    <Content Include="Content\images\but_razd.jpg" />
+    <Content Include="Content\images\but_read.gif" />
+    <Content Include="Content\images\cancel.png" />
+    <Content Include="Content\images\cont_bg.png" />
+    <Content Include="Content\images\cont_bot.jpg" />
+    <Content Include="Content\images\cont_top.jpg" />
+    <Content Include="Content\images\cursors\cursor_arrow_left.cur" />
+    <Content Include="Content\images\cursors\cursor_arrow_left.gif" />
+    <Content Include="Content\images\cursors\cursor_arrow_left.png" />
+    <Content Include="Content\images\cursors\cursor_arrow_right.cur" />
+    <Content Include="Content\images\cursors\cursor_arrow_right.gif" />
+    <Content Include="Content\images\cursors\cursor_arrow_right.png" />
+    <Content Include="Content\images\deanos_logo.gif" />
+    <Content Include="Content\images\debug.png" />
+    <Content Include="Content\images\delete.png" />
+    <Content Include="Content\images\dot.gif" />
+    <Content Include="Content\images\error.png" />
+    <Content Include="Content\images\fish.png" />
+    <Content Include="Content\images\footer.jpg" />
+    <Content Include="Content\images\img1.jpg" />
+    <Content Include="Content\images\img2.jpg" />
+    <Content Include="Content\images\img3.jpg" />
+    <Content Include="Content\images\info.png" />
+    <Content Include="Content\images\logo.jpg" />
+    <Content Include="Content\images\menu.jpg" />
+    <Content Include="Content\images\over.jpg" />
+    <Content Include="Content\images\razd.gif" />
+    <Content Include="Content\images\tit.png" />
+    <Content Include="Content\Maps.css" />
+    <Content Include="Content\smoothDivScroll.css" />
+    <Content Include="GoogleServiceAccountInfo.txt" />
+    <Content Include="printMinneapolis.htm" />
+    <Content Include="Global.asax" />
+    <Content Include="printMadison.htm" />
+    <Content Include="Scripts\2011.3.1306\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\2011.3.1306\jquery.validate.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.autocomplete.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.calendar.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.chart.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.combobox.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.common.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.datepicker.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.datetimepicker.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.draganddrop.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.editor.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.grid.editing.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.grid.filtering.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.grid.grouping.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.grid.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.grid.reordering.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.grid.resizing.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.imagebrowser.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.list.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.menu.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.panelbar.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.slider.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.splitter.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.tabstrip.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.textbox.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.timepicker.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.treeview.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.upload.min.js" />
+    <Content Include="Scripts\2011.3.1306\telerik.window.min.js" />
+    <Content Include="Scripts\catalog.js" />
+    <Content Include="Scripts\demo.js" />
+    <Content Include="Scripts\home.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.lightbox-0.5.js" />
+    <Content Include="Scripts\jquery.mousewheel.js" />
+    <Content Include="Scripts\jquery.rf.slideshow.js" />
+    <Content Include="Scripts\jquery.smoothDivScroll-1.2.js" />
+    <Content Include="Scripts\jquery.tinywatermark-2.1.0.js" />
+    <Content Include="Scripts\jquery.tinywatermark-3.1.0.js" />
+    <Content Include="Scripts\jquery.tmpl.js" />
+    <Content Include="Scripts\json2.js" />
+    <Content Include="Scripts\layout.js" />
+    <Content Include="Scripts\response.js" />
+    <Content Include="Scripts\validation.js" />
+    <Content Include="Shared\DeleteSqlScript.txt" />
+    <Content Include="uploadify\cancel.png" />
+    <Content Include="uploadify\jquery.uploadify.v2.1.4.min.js" />
+    <Content Include="uploadify\swfobject.js" />
+    <Content Include="uploadify\uploadify.css" />
+    <Content Include="uploadify\uploadify.swf" />
+    <Content Include="Content\SiteMap.txt" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery-1.4.4.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Fishing-Guide-Request.cshtml" />
+    <Content Include="Views\Home\Fishing-Guide-Home.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Accounts\Models\" />
+    <Folder Include="Areas\Accounts\Views\Shared\" />
+    <Folder Include="Content\images\lightbox\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Accounts\Views\Member\Index.cshtml" />
+    <Content Include="Areas\Accounts\Views\Web.config" />
+    <Content Include="Areas\Accounts\Views\Member\Home.cshtml" />
+    <Content Include="Areas\Accounts\Views\Member\Account.cshtml" />
+    <Content Include="Areas\Accounts\Views\Member\Credentials.cshtml" />
+    <None Include="Content\images\Thumbs.db" />
+    <Content Include="Views\FishReports\Chippewa-Flowage-Hayward.cshtml" />
+    <Content Include="Views\Users\CreateAccount.cshtml" />
+    <Content Include="Views\Shared\Archive-Post.cshtml" />
+    <Content Include="Views\Home\FishReports.cshtml" />
+    <Content Include="Views\Home\Rates.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\Home\Fishing-Guide-Directions.cshtml" />
+    <Content Include="Views\Home\LocalEvents.cshtml" />
+    <Content Include="Views\Home\Sponsors.cshtml" />
+    <Content Include="Views\Home\Testimonials.cshtml" />
+    <Content Include="Views\FishReports\Details.cshtml" />
+    <Content Include="Views\Forums\Chippewa-Flowage-Hayward.cshtml" />
+    <Content Include="Views\Forums\Posts.cshtml" />
+    <Content Include="Views\Forums\PostDetails.cshtml" />
+    <Content Include="Views\Forums\ThreadDetails.cshtml" />
+    <Content Include="Views\Forums\ForumDetails.cshtml" />
+    <Content Include="Views\Home\Slideshow.cshtml" />
+    <Content Include="Views\Albums\Chippewa-Flowage-Hayward.cshtml" />
+    <Content Include="Views\Home\Deano.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Home\IndexTan.cshtml" />
+    <Content Include="Views\Shared\_LayoutTan.cshtml" />
+    <Content Include="Views\Home\IndexBlue.cshtml" />
+    <Content Include="Views\Shared\_LayoutBlue.cshtml" />
+    <Content Include="Views\Shared\AccessDenied.cshtml" />
+    <Content Include="Views\Users\ForgotPassword.cshtml" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Shared\API Project-963bac402dc3.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\API Project-6268c4278944.p12">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\PublishProfiles\deanosguideservice - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\deanosguideservice - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\deanosguideservice - Web Deploy.pubxml" />
+    <None Include="uploadify\uploadify.php" />
+    <Content Include="Views\Shared\Friends.cshtml" />
+    <Content Include="Views\Shared\Archive-Report.cshtml" />
+    <Content Include="Views\Home\Fishing-Guide-Rates.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Deano.Data\Deano.Data.csproj">
+      <Project>{427090F6-788E-4661-BF49-518382D829D9}</Project>
+      <Name>Deano.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Deano.Models\Deano.Models.csproj">
+      <Project>{41AFC214-001A-4E7A-B506-755937EB00EE}</Project>
+      <Name>Deano.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45398</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+</Project>

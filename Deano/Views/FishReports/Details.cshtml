@@ -1,0 +1,108 @@
+﻿@model  Deano.Models.Prototypes.Users.Report
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.tmpl.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/uploadify/jquery.uploadify.v2.1.4.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/uploadify/swfobject.js")" type="text/javascript"></script>
+<script type="text/javascript">
+
+    var responseForumDetails = null;
+
+    function onBeginForumDetails(e) {
+        var v = $('#frmDetails').validate();
+        responseForumDetails.onBegin(e, 'responseForumDetails');
+    }
+
+    function onSuccessForumDetails(e) {
+        if (e.Success == true) {
+            var size = $('.uploadifyQueueItem').get().length;
+            if (size > 0) {
+                $('#file_upload').uploadifyUpload();
+            }
+            else {
+                unloadCreateFishReport();
+            }
+            responseForumDetails.onSuccess(e);
+        }
+        else {
+            responseForumDetails.onSuccess(e);
+        }
+
+        $('html').prop('scrollTop', 0);
+    }
+
+    $(function () {
+        responseForumDetails = new jsonResponse('responseForumDetails');
+        Validation.markRequiredFields('#frmDetails');
+
+        $('#ReportId').rules('remove');
+
+        $('#btnSave').click(function () {
+            $('#frmDetails').trigger('submit');
+        });
+
+        $('#file_upload').uploadify({
+            'uploader': '/uploadify/uploadify.swf',
+            'script': '/FishReports/UploadReportDocuments',
+            'cancelImg': '/uploadify/cancel.png',
+            'scriptData': { 'temporaryId': $('#TemporaryId').val() },
+            'folder': '/Pictures',
+            'auto': false,
+            'multi': true,
+            'buttonText': 'Add Photos',
+            'onAllComplete': function (event, data) {
+                unloadCreateFishReport();
+            }
+        });
+
+        $('#Subject').rules("add", { required: true,
+            messages: {
+                required: 'Please enter a Subject.'
+            }
+        });
+
+        $('#Body').rules("add", { required: true,
+            messages: {
+                required: 'Please enter a Message.'
+            }
+        });
+    }
+    );
+</script>
+@using (Ajax.BeginForm("Details", "FishReports", null, new AjaxOptions() { HttpMethod = "Post", OnBegin = "onBeginForumDetails", OnSuccess = "onSuccessForumDetails", OnComplete = "responseForumDetails.onComplete" }, new { id = "frmDetails" }))
+{
+    <div class="title">
+        Create Fish Report</div>
+    <div id="responseForumDetails">
+    </div>
+    @Html.HiddenFor(m => m.ReportId)
+    @Html.HiddenFor(m => m.TemporaryId)
+    <div class="editorLabel">
+        @Html.LabelFor(m => m.Subject)</div>
+    <div class="editorField">
+        @Html.EditorFor(m => m.Subject)
+        @Html.ValidationMessageFor(m => m.Subject)
+    </div>
+    <div class="editorLabel">
+        @Html.LabelFor(m => m.Body)</div>
+    <div class="editorField" style="width: 800px">
+        @Html.TextAreaFor(m => m.Body, new { rows = "10", cols = "75" })
+        @Html.ValidationMessageFor(m => m.Body)
+    </div>
+    <div class="editorLabel">
+        @Html.LabelFor(m => m.Tags)</div>
+    <div class="editorField">
+        @Html.TextAreaFor(m => m.Tags, new { rows = "1", cols = "75" })
+    </div>
+    <div>
+        <input id="file_upload" type="file" name="file_upload" />
+    </div>
+    <div class="commands">
+        <div id="btnSave" class="buttonMap">
+            Save</div>
+        <div class="buttonMap" onclick="unloadCreateFishReport()">
+            Cancel</div>
+    </div>
+    <input type="hidden" name="FishReportId" id="FishReportId" />
+}

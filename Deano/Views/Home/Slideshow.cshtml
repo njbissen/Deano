@@ -1,0 +1,53 @@
+﻿<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.tmpl.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/catalog.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.mousewheel.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    var catalog = null;
+
+    $(function () {
+        catalog = new Catalog('/Albums/_Index?album=slideshow');
+        catalog.ItemTemplate = '#slideshowTemplate';
+        GetCatalogData(0);
+    });
+
+    function GetCatalogData(index) {
+        catalog.GetData(index, startSlideshow());
+    }
+
+    function startSlideshow() {
+    }
+</script>
+<h1 style="float: left; text-align: left; width: 600px">
+    Slideshow<span style="float: right; padding-bottom: 5px"> </span>
+</h1>
+<div style="clear: both">
+</div>
+<div id="catalog">
+</div>
+<script type="text/javascript">
+    // Initialize the plugin with no custom options
+    $(document).ready(function () {
+
+        var slideshow = $('#slideshow').slideshow({
+            // every option
+            transition: 'blind(left, true, swing)', // blind(direction, fade, ease)
+            selector: '> *', // which elements in #slideshow to be the slides
+            initialIndex: 0, // index of element to show at first
+            autoStyle: true, // handle some basic styles for you
+            autoPlay: true, // don't cycle
+            delay: 3000, // ms between transitions when autoPlay is true
+            duration: 600, // duration of a transition
+            show: function (event, params) {
+                //console.log( params );
+            },
+            showComplete: function (event, params) {
+                //console.log(params);
+            }
+        }).data('slideshow'); // get the instance out of the element data
+    });
+</script>
