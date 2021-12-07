@@ -393,6 +393,10 @@
     <Content Include="Views\Home\Fishing-Guide-Rates.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Deano.Azure.Models\Deano.Azure.Models.csproj">
+      <Project>{E6D43181-8BEC-4235-BB10-7DB40E9CF6CC}</Project>
+      <Name>Deano.Azure.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Deano.Data\Deano.Data.csproj">
       <Project>{427090F6-788E-4661-BF49-518382D829D9}</Project>
       <Name>Deano.Data</Name>

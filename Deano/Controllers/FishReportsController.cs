@@ -22,10 +22,14 @@ namespace Deano.Controllers
 		[ActionName("Chippewa-Flowage-Hayward")]
 		public ActionResult Index(string search)
 		{
-			Deano.Data.User user = manager.GetUser();
-			if (user != null && user.RoleId == 1)
+			var user = manager.GetUser();
+			if (user != null && user.Role == "Administrator")
 			{
-				ViewBag.Role = user.Role.Name;
+				ViewBag.Role = "Admin";
+			}
+			else if(user  !=null)
+			{
+				ViewBag.Role = user.Role;
 			}
 			else
 			{

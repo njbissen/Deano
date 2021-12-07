@@ -32,6 +32,15 @@ namespace Deano.Models.Prototypes.Users
         public string Password { get; set; }
         public DateTime CreatedDate { get; set; }
 
+        public User(Azure.Models.User model)
+        {
+            Phone = model.PhoneNumber;
+            Username = model.Name;
+            Password = model.Password;
+            //Handle = model.Handle;
+           // UserId = model.Id;
+           // CreatedDate = model.CreatedDate;
+        }
         public User(data.User model)
         {
             Phone = model.Phone;

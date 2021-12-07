@@ -15,6 +15,8 @@ namespace Deano.Azure
 		private static string ForumsTableName = "forumTopics";
 		private static string ForumThreadsTableName = "forumThreads";
 		private static string ForumPostsTableName = "forumPosts";
+		private static string UsersTableName = "users";
+
 
 		public async Task<IEnumerable<Forum>> GetForums(int pageIndex, int pageSize)
 		{
@@ -271,5 +273,31 @@ namespace Deano.Azure
 			await table.ExecuteAsync(operation);
 			return entity.RowKey;
 		}
+
+		public async Task<IEnumerable<User>> GetUsers()
+		{
+			IList<User> users = new List<User>();
+			var table = GetTable(UsersTableName);
+			TableQuery<UserEntity> query = new TableQuery<UserEntity>();
+
+			TableContinuationToken token = null;
+			do
+			{
+				var resultSegment = await table.ExecuteQuerySegmentedAsync(query, token);
+				token = resultSegment.ContinuationToken;
+
+				foreach (var entity in resultSegment.Results)
+				{
+					users.Add(new User()
+					{
+						Id = entity.RowKey,
+						Name = entity.Name,
+						Password = Crypto.Encrypt(entity.Password)
+					});
+				}
+			} while (token != null);
+			return users;
+		}
+
 	}
 }

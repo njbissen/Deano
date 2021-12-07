@@ -58,21 +58,21 @@ namespace Deano.Models.Business
 			IEnumerable<Azure.Models.Post> posts = null;
 			IQueryable<Deano.Azure.Models.Report> reports = null;
 			response = new JsonResponse();
-			Data.User user = GetUser();
+			var user = GetUser();
 
-			data.GetThreadPosts(-1, "My", user.Username, out posts);
+			data.GetThreadPosts(-1, "My", user.Name, out posts);
 			response.Messages.Add(new JsonMessage(string.Format("You have created {0} posts.", posts.ToList().Count.ToString()), JsonMessageType.Info));
 
-			data.GetThreadPosts(-1, "Favorites", user.Username, out posts);
+			data.GetThreadPosts(-1, "Favorites", user.Name, out posts);
 			response.Messages.Add(new JsonMessage(string.Format("You have {0} favorite posts.", posts.ToList().Count.ToString()), JsonMessageType.Info));
 
-			reports = data.GetReports("Favorites", user.Username);
+			reports = data.GetReports("Favorites", user.Name);
 			response.Messages.Add(new JsonMessage(string.Format("You have {0} favorite reports.", reports.Count().ToString()), JsonMessageType.Info));
 		}
 
 		public prototypes.User CreateRegistration()
 		{
-			Deano.Data.User model = Data.User.CreateUser(-1, string.Empty, string.Empty, string.Empty, 2, DateTime.Now, true);
+			Azure.Models.User model = new Azure.Models.User();
 			return UserTransformation.Transform<prototypes.User>(model);
 		}
 
@@ -140,7 +140,7 @@ namespace Deano.Models.Business
 
 			try
 			{
-				Deano.Data.User account = data.GetUser(username);
+				var account = data.GetUser(username);
 				if (account == null)
 				{
 					response.Messages.Add(new JsonMessage("Your email address could not be found.", JsonMessageType.Warning));
@@ -153,7 +153,7 @@ namespace Deano.Models.Business
 
 				MailAddress
 					maFrom = new MailAddress(fromAddress.Value, displayName.Value, Encoding.UTF8),
-					maTo = new MailAddress(account.Username, account.Handle, Encoding.UTF8);
+					maTo = new MailAddress(account.Name, account.Name, Encoding.UTF8);
 
 				MailMessage mmsg = new MailMessage(maFrom, maTo);
 				string message = string.Format("Your password for {0} is {1}.", domainName.Value, Crypto.Decrypt(account.Password));
@@ -249,30 +249,28 @@ namespace Deano.Models.Business
 
 		public prototypes.Credentials GetCredentials(string name)
 		{
-			Deano.Data.User model = data.GetUser(name);
+			var model = data.GetUser(name);
 			return UserTransformation.Transform<prototypes.Credentials>(model);
 		}
 
-		public Deano.Data.User GetUser()
+		public Azure.Models.User GetUser()
 		{
-			Deano.Data.User model = data.GetUser(HttpContext.Current.User.Identity.Name);
-			return model;
+			return data.GetUser(HttpContext.Current.User.Identity.Name);
 		}
 
-		public Deano.Data.User GetUser(string name)
+		public Azure.Models.User GetUser(string name)
 		{
-			Deano.Data.User model = data.GetUser(name);
-			return model;
+			return data.GetUser(name);
 		}
 
 		public bool ValidateEmailAddress(int userId, string emailAddress)
 		{
-			Deano.Data.User model = data.GetUser(emailAddress);
+			var model = data.GetUser(emailAddress);
 			if (model == null)
 			{
 				return true;
 			}
-			else if (model.UserId == userId)
+			else if (model.Id == userId.ToString())
 			{
 				return true;
 			}
@@ -302,7 +300,7 @@ namespace Deano.Models.Business
 		public bool ValidateCredentials(string name, string password, out JsonResponse response)
 		{
 			response = new JsonResponse();
-			Deano.Data.User model = data.GetUser(name, Crypto.Encrypt(password));
+			var model = data.GetUser(name, Crypto.Encrypt(password));
 			if (model == null)
 			{
 				response.Messages.Add(new JsonMessage("Invalid Username and/or Password.", JsonMessageType.Warning));
@@ -317,7 +315,7 @@ namespace Deano.Models.Business
 
 		public prototypes.Account GetAccount(string name)
 		{
-			Deano.Data.User model = data.GetUser(name);
+			var model = data.GetUser(name);
 			return UserTransformation.Transform<prototypes.Account>(model);
 		}
 
@@ -364,36 +362,36 @@ namespace Deano.Models.Business
 
 		public void SaveForumTopic(Deano.Data.Forum model)
 		{
-			Deano.Data.User user = data.GetUser(HttpContext.Current.User.Identity.Name);
-			if (user != null)
-			{
-				model.CreatedBy = user.UserId;
-			}
-			else
-			{
-				model.CreatedBy = 2;
-			}
-			model.CreatedDate = DateTime.Now;
-			data.SaveForumTopic(model);
+			//var user = data.GetUser(HttpContext.Current.User.Identity.Name);
+			//if (user != null)
+			//{
+			//	model.CreatedBy = user.Id;
+			//}
+			//else
+			//{
+			//	model.CreatedBy = 2;
+			//}
+			//model.CreatedDate = DateTime.Now;
+			//data.SaveForumTopic(model);
 		}
 
 		public void SaveThread(prototypes.Thread model)
 		{
-			Deano.Data.User user = data.GetUser(HttpContext.Current.User.Identity.Name);
-			int createdBy = 2;
+			var user = data.GetUser(HttpContext.Current.User.Identity.Name);
+			string createdBy = "1";
 			if (user != null)
 			{
-				createdBy = user.UserId;
+				createdBy = user.Id;
 			}
 
-			Deano.Data.Thread thread = Deano.Data.Thread.CreateThread(-1, model.Subject, model.ForumId, createdBy, DateTime.Now);
-			data.SaveThread(thread);
-			if (thread.ThreadId > 0)
-			{
-				Deano.Data.Post post = Deano.Data.Post.CreatePost(-1, model.Body, createdBy, DateTime.Now, thread.ThreadId, new Guid(model.TemporaryId));
-				post.Subject = thread.Subject;
-				SavePost(post);
-			}
+			//Deano.Data.Thread thread = Deano.Data.Thread.CreateThread(-1, model.Subject, model.ForumId, createdBy, DateTime.Now);
+			//data.SaveThread(thread);
+			//if (thread.ThreadId > 0)
+			//{
+			//	Deano.Data.Post post = Deano.Data.Post.CreatePost(-1, model.Body, createdBy, DateTime.Now, thread.ThreadId, new Guid(model.TemporaryId));
+			//	post.Subject = thread.Subject;
+			//	SavePost(post);
+			//}
 		}
 
 		public IEnumerable<string> GetTags(int articleTypeId)
@@ -419,18 +417,18 @@ namespace Deano.Models.Business
 
 		public void SaveReport(Deano.Data.Report model)
 		{
-			Deano.Data.User user = data.GetUser(HttpContext.Current.User.Identity.Name);
-			if (user != null)
-			{
-				model.CreatedBy = user.UserId;
-			}
-			else
-			{
-				model.CreatedBy = 2;
-			}
-			model.CreatedDate = DateTime.UtcNow;
-			int reportId = data.SaveReport(model, HttpContext.Current.User.Identity.Name);
-			SaveTags(reportId, model.Tags, ArticleTypes.Report);
+			var user = data.GetUser(HttpContext.Current.User.Identity.Name);
+			//if (user != null)
+			//{
+			//	model.CreatedBy = user.UserId;
+			//}
+			//else
+			//{
+			//	model.CreatedBy = 2;
+			//}
+			//model.CreatedDate = DateTime.UtcNow;
+			//int reportId = data.SaveReport(model, HttpContext.Current.User.Identity.Name);
+			//SaveTags(reportId, model.Tags, ArticleTypes.Report);
 		}
 
 		public void SaveTags(int articleId, string tags, int articleTypeId)
@@ -491,18 +489,18 @@ namespace Deano.Models.Business
 
 		public void SavePost(Deano.Data.Post model)
 		{
-			Deano.Data.User user = data.GetUser(HttpContext.Current.User.Identity.Name);
-			if (user != null)
-			{
-				model.CreatedBy = user.UserId;
-			}
-			else
-			{
-				model.CreatedBy = 2;
-			}
-			model.CreatedDate = DateTime.Now;
-			int postId = data.SavePost(model);
-			SaveTags(postId, model.Tags, ArticleTypes.Post);
+			var user = data.GetUser(HttpContext.Current.User.Identity.Name);
+			//if (user != null)
+			//{
+			//	model.CreatedBy = user.UserId;
+			//}
+			//else
+			//{
+			//	model.CreatedBy = 2;
+			//}
+			//model.CreatedDate = DateTime.Now;
+			//int postId = data.SavePost(model);
+			//SaveTags(postId, model.Tags, ArticleTypes.Post);
 		}
 
 		public void SavePostPictures(string temporaryId, List<string> paths)
