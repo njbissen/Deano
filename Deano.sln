@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deano.Models", "Deano.Model
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deano.Azure", "Deano.Azure\Deano.Azure\Deano.Azure.csproj", "{4ED185D1-C35B-4DAF-98E9-1BD7A6AF4743}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deano.Azure.Models", "Deano.Azure.Models\Deano.Azure.Models.csproj", "{E6D43181-8BEC-4235-BB10-7DB40E9CF6CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deano.Azure.Models", "Deano.Azure.Models\Deano.Azure.Models.csproj", "{E6D43181-8BEC-4235-BB10-7DB40E9CF6CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

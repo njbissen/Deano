@@ -7,12 +7,15 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Deano.Azure.Models;
+using System.Net.Http.Headers;
+using System.IO;
 
 namespace Deano.Data
 {
 	public partial class Repository
 	{
 
+		string deanoListenersPhoto = "https://deanos-listeners.azurewebsites.net/api/photo";
 		string deanoListenersReports = "https://deanos-listeners.azurewebsites.net/api/reports";
 		HttpClient httpClientReports = new HttpClient();
 
@@ -114,6 +117,19 @@ namespace Deano.Data
 
 		public void SaveReportPictures(string temporaryId, List<string> paths)
 		{
+			string filePath = "";
+
+			using (var form = new MultipartFormDataContent())
+			{
+
+				var fileContent = new ByteArrayContent(File.ReadAllBytes(filePath));
+				fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+				form.Add(fileContent, "file", Path.GetFileName(filePath));
+
+				var response = httpClientReports.PostAsync(deanoListenersPhoto, form);
+			}
+
+
 			Guid id = new Guid(temporaryId);
 			Report post = context.Reports.FirstOrDefault(m => m.TemporaryId.Equals(id));
 			if (post != null)
