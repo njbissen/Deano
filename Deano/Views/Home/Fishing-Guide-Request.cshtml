@@ -1,181 +1,225 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@using BotDetect.Web.Mvc
+
+@{ 
+		MvcCaptcha exampleCaptcha = new MvcCaptcha("ExampleCaptcha");
+		exampleCaptcha.UserInputID = "CaptchaCode";
+	}
+
 @model Deano.Data.Message
+<link href="<%: Url.Content(" ~ /" + BotDetect.Web.CaptchaUrls.LayoutStyleSheetUrl) %>"    rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 
-    var responseMessage = null;
+	var responseMessage = null;
 
-    function onBeginMessage(e) {
-        var v = $('#frmDetails').validate();
-        responseMessage.onBegin(e, 'responseMessage');
-    }
+	function onBeginMessage(e) {
+		var v = $('#frmDetails').validate();
+		responseMessage.onBegin(e, 'responseMessage');
+	}
 
-    function onSuccessMessage(e) {
-        if (e.Success == true) {
-            Layout.RefreshPanel('/Home/ContactUs', Layout.WalleyesPanel);
-        }
-        else {
-            responseMessage.onSuccess(e);
-        }
+	function onSuccessMessage(e) {
+		if (e.Success == true) {
+			Layout.RefreshPanel('/Home/ContactUs', Layout.WalleyesPanel);
+		}
+		else {
+			responseMessage.onSuccess(e);
+		}
 
-        $('html').prop('scrollTop', 0);
-    }
+		$('html').prop('scrollTop', 0);
+	}
 
-    $(document).ready(function () {
-        $('#btnContact').removeClass('button');
-        $('#btnContact').addClass('buttonSelected');
-        responseMessage = new jsonResponse('responseMessage');
-        Validation.markRequiredFields('#frmDetails');
-        $("#RequestDate").blur(function () {
-            var txt = $(this).val();
-            if (txt == null || txt.length == 0) {
-                Validation.clearErrors('#RequestDate');
-            }
-        });
+	$(document).ready(function () {
+		$('#btnContact').removeClass('button');
+		$('#btnContact').addClass('buttonSelected');
+		responseMessage = new jsonResponse('responseMessage');
+		Validation.markRequiredFields('#frmDetails');
+		$("#RequestDate").blur(function () {
+			var txt = $(this).val();
+			if (txt == null || txt.length == 0) {
+				Validation.clearErrors('#RequestDate');
+			}
+		});
 
-        $('#btnSend').click(function () {
-            $('#frmDetails').trigger('submit');
-        });
+		$('#btnSend').click(function () {
+			$('#frmDetails').trigger('submit');
+		});
 
-        $('#btnReset').click(function () {
-            $('#frmDetails')[0].reset();
-        });
+		$('#btnReset').click(function () {
+			$('#frmDetails')[0].reset();
+		});
 
-        $('#FromEmail').rules("add", { required: true, email: true,
-            messages: {
-                required: 'Email Address is required.',
-                email: 'Email Address is not valid.'
-            }
-        });
+		$('#FromEmail').rules("add", {
+			required: true, email: true,
+			messages: {
+				required: 'Email Address is required.',
+				email: 'Email Address is not valid.'
+			}
+		});
 
-        $('#Subject').rules("add", { required: true,
-            messages: {
-                required: 'Subject is required.'
-            }
-        });
+		$('#Subject').rules("add", {
+			required: true,
+			messages: {
+				required: 'Subject is required.'
+			}
+		});
 
-        $('#RequestDate').rules("add", { date: true,
-            messages: {
-                date: 'Date is invalid.'
-            }
-        });
+		$('#RequestDate').rules("add", {
+			date: true,
+			messages: {
+				date: 'Date is invalid.'
+			}
+		});
 
-        $('#Body').rules("add", { required: true,
-            messages: {
-                required: 'Message is required.'
-            }
-        });
-    }
-    );
+		$('#Body').rules("add", {
+			required: true,
+			messages: {
+				required: 'Message is required.'
+			}
+		});
+	}
+	);
 </script>
 <div id="walleyesContainer">
-    <div id="walleyes">
-        <div id="walleyesTitle">
-            Request a Guide Trip</div>
-        <div id="walleyesContent">
-            <div id="responseMessage">
-            </div>
-            @using (Ajax.BeginForm("MessageDetails", null, new AjaxOptions() { HttpMethod = "Post", OnBegin = "onBeginMessage", OnSuccess = "onSuccessMessage", OnComplete = "responseMessage.onComplete" }, new { id = "frmDetails" }))
-            {
-                <div style="width: 900px">
-                    <div style="float: left">
-                        <div class="editorLabel">
-                            Your Email Address</div>
-                        <div class="editorField ">
-                            @Html.TextBoxFor(m => m.FromEmail, new { @class = "requiredField" })
-                            @Html.ValidationMessageFor(m => m.FromEmail)
-                        </div>
-                        <div class="editorLabel">
-                            Your Name</div>
-                        <div class="editorField">
-                            @Html.TextBoxFor(m => m.FromName)
-                            @Html.ValidationMessageFor(m => m.FromName)
-                        </div>
-                        <div class="editorLabel">
-                            Phone #</div>
-                        <div class="editorField">
-                            @Html.TextBoxFor(m => m.FromPhone)
-                            @Html.ValidationMessageFor(m => m.FromPhone)
-                        </div>
-                        <div class="editorLabel">
-                            Subject</div>
-                        <div class="editorField">
-                            @Html.TextBoxFor(m => m.Subject, new { @class = "requiredField" })
-                            @Html.ValidationMessageFor(m => m.Subject)
-                        </div>
-                    </div>
-                    <div style="float: left; margin-left: 50px">
-                        <div class="editorLabel">
-                            Request Date</div>
-                        <div class="editorField">
-                            @Html.TextBoxFor(m => m.RequestDate)
-                            @Html.ValidationMessageFor(m => m.RequestDate)
-                        </div>
-                        <div class="editorLabel">
-                            Trip Type</div>
-                        <div class="editorField">
-                            <select name="NumberOfDays" id="NumberOfDays">
-                                <option>Full Day</option>
-                                <option>Half Day</option>
-                                <option>Night Fishing</option>
-                                <option>Half Day Pontoon</option>
-                                <option>Full Day Pontoon</option>
-                            </select>
-                        </div>
-                        <div class="editorLabel">
-                            # of People</div>
-                        <div class="editorField">
-                            <select name="NumberOfPeople" id="NumberOfPeople">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div style="clear: both">
-                </div>
-                <div class="editorLabel">
-                    Message</div>
-                <div class="editorField">
-                    @Html.TextAreaFor(m => m.Body, new { @class = "requiredField", rows = "10", cols = "77" })
-                    @Html.ValidationMessageFor(m => m.Body)
-                </div>
-                
-                <div class="editorLabel">
-                    Desired Catch</div>
-                <div class="editorField">
-                    <input type="checkbox" class="checkbox" name="catchType" value="Black Crappie" /><label>Black
-                        Crappie</label>
-                    <input type="checkbox" class="checkbox" name="catchType" value="Bluegill" /><label>Bluegill</label>
-                    <input type="checkbox" class="checkbox" name="catchType" value="Largemouth Bass" /><label>Largemouth
-                        Bass</label>
-                    <input type="checkbox" class="checkbox" name="catchType" value="Muskellunge" /><label>Muskellunge
-                        (Muskie)
-                    </label>
-                    <input type="checkbox" class="checkbox" name="catchType" value="Northern Pike" /><label>Northern
-                        Pike</label>
-                    <br />
-                    <input type="checkbox" class="checkbox" name="catchType" value="Smallmouth Bass" /><label>Smallmouth
-                        Bass</label>
-                    <input type="checkbox" class="checkbox" name="catchType" value="Walleye" /><label>Walleye</label>
-                    <input type="checkbox" class="checkbox" name="catchType" value="Yellow Perch" /><label>Yellow
-                        Perch</label>
-                </div>
-                <div class="commands">
-                    <div id="btnSend" class="buttonMap">
-                        <a href="javascript:void(0)">Send</a></div>
-                    <div id="btnReset" class="buttonMap">
-                        <a href="javascript:void(0)">Reset</a></div>
-                    <div style="clear: both">
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
+	<div id="walleyes">
+		<div id="walleyesTitle">
+			Request a Guide Trip
+		</div>
+		<div id="walleyesContent">
+			<div id="responseMessage">
+			</div>
+			@using (Ajax.BeginForm("MessageDetails", null, new AjaxOptions() { HttpMethod = "Post", OnBegin = "onBeginMessage", OnSuccess = "onSuccessMessage", OnComplete = "responseMessage.onComplete" }, new { id = "frmDetails" }))
+			{
+				<div style="width: 900px">
+					<div style="float: left">
+						<div class="editorLabel">
+							Your Email Address
+						</div>
+						<div class="editorField ">
+							@Html.TextBoxFor(m => m.FromEmail, new { @class = "requiredField" })
+							@Html.ValidationMessageFor(m => m.FromEmail)
+						</div>
+						<div class="editorLabel">
+							Your Name
+						</div>
+						<div class="editorField">
+							@Html.TextBoxFor(m => m.FromName)
+							@Html.ValidationMessageFor(m => m.FromName)
+						</div>
+						<div class="editorLabel">
+							Phone #
+						</div>
+						<div class="editorField">
+							@Html.TextBoxFor(m => m.FromPhone)
+							@Html.ValidationMessageFor(m => m.FromPhone)
+						</div>
+						<div class="editorLabel">
+							Subject
+						</div>
+						<div class="editorField">
+							@Html.TextBoxFor(m => m.Subject, new { @class = "requiredField" })
+							@Html.ValidationMessageFor(m => m.Subject)
+						</div>
+					</div>
+					<div style="float: left; margin-left: 50px">
+						<div class="editorLabel">
+							Request Date
+						</div>
+						<div class="editorField">
+							@Html.TextBoxFor(m => m.RequestDate)
+							@Html.ValidationMessageFor(m => m.RequestDate)
+						</div>
+						<div class="editorLabel">
+							Trip Type
+						</div>
+						<div class="editorField">
+							<select name="NumberOfDays" id="NumberOfDays">
+								<option>Full Day</option>
+								<option>Half Day</option>
+								<option>Night Fishing</option>
+								<option>Half Day Pontoon</option>
+								<option>Full Day Pontoon</option>
+							</select>
+						</div>
+						<div class="editorLabel">
+							# of People
+						</div>
+						<div class="editorField">
+							<select name="NumberOfPeople" id="NumberOfPeople">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div style="clear: both">
+				</div>
+				<div class="editorLabel">
+					Message
+				</div>
+				<div class="editorField">
+					@Html.TextAreaFor(m => m.Body, new { @class = "requiredField", rows = "10", cols = "77" })
+					@Html.ValidationMessageFor(m => m.Body)
+				</div>
+
+				<div class="editorLabel">
+					Desired Catch
+				</div>
+				<div class="editorField">
+					<input type="checkbox" class="checkbox" name="catchType" value="Black Crappie" /><label>
+						Black
+						Crappie
+					</label>
+					<input type="checkbox" class="checkbox" name="catchType" value="Bluegill" /><label>Bluegill</label>
+					<input type="checkbox" class="checkbox" name="catchType" value="Largemouth Bass" /><label>
+						Largemouth
+						Bass
+					</label>
+					<input type="checkbox" class="checkbox" name="catchType" value="Muskellunge" /><label>
+						Muskellunge
+						(Muskie)
+					</label>
+					<input type="checkbox" class="checkbox" name="catchType" value="Northern Pike" /><label>
+						Northern
+						Pike
+					</label>
+					<br />
+					<input type="checkbox" class="checkbox" name="catchType" value="Smallmouth Bass" /><label>
+						Smallmouth
+						Bass
+					</label>
+					<input type="checkbox" class="checkbox" name="catchType" value="Walleye" /><label>Walleye</label>
+					<input type="checkbox" class="checkbox" name="catchType" value="Yellow Perch" /><label>
+						Yellow
+						Perch
+					</label>
+				</div>
+				<div class="commands">
+					<div style="float:left">
+						@Html.Captcha(exampleCaptcha)
+					</div>
+					<div style="float: left; padding-top: 10px; ">
+						@Html.TextBox("CaptchaCode")
+					</div>
+					<div style="float:right; padding-top:10px; padding-right:30px">
+						<div id="btnSend" class="buttonMap">
+							<a href="javascript:void(0)">Send</a>
+						</div>
+						<div id="btnReset" class="buttonMap">
+							<a href="javascript:void(0)">Reset</a>
+						</div>
+					</div>
+					<div style="clear: both">
+					</div>
+				</div>
+			}
+		</div>
+	</div>
 </div>
 @Html.Partial("Friends")

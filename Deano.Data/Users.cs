@@ -70,8 +70,8 @@ namespace Deano.Data
 
 		public void SaveMessage(Deano.Data.Message model)
 		{
-			context.AddToMessages(model);
-			context.SaveChanges();
+			//context.AddToMessages(model);
+			//context.SaveChanges();
 		}
 
 		public void SaveBookmark(int userId, int? postId, int? reportId)
@@ -215,7 +215,7 @@ namespace Deano.Data
 				SettingKey.EmailCredentialsPassword, "fishWalleye"
 			},
 			{
-				SettingKey.RequestEmailAddress, "admin@deanosguideservice.com"
+				SettingKey.RequestEmailAddress, "admin@deanosguideservice.com;nicholas.bissen@gmail.com"
 			},
 			{
 				SettingKey.RequestDisplayName, "deano"

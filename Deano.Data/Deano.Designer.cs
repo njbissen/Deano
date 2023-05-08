@@ -1208,14 +1208,16 @@ namespace Deano.Data
             return message;
         }
 
-        #endregion
+		#endregion
 
-        #region Simple Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+		#region Simple Properties
+
+		public string CaptchaCode { get; set; }
+
+		/// <summary>
+		/// No Metadata Documentation available.
+		/// </summary>
+		[EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 MessageId
         {

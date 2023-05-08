@@ -37,7 +37,7 @@ namespace Deano.Models.Business
 		private NetworkCredential GetNetworkCredentials()
 		{
 			string username = data.GetSetting(Settings.EmailCredentialsUsername).Value;
-			string password = data.GetSetting(Settings.EmailCredentialsPassword).Value;
+			string password = "zomjdeswaauamvsr";// data.GetSetting(Settings.EmailCredentialsPassword).Value;
 			NetworkCredential credentials = new NetworkCredential(username, password);
 			return credentials;
 		}
@@ -45,6 +45,7 @@ namespace Deano.Models.Business
 		private SmtpClient GetSmtpClient()
 		{
 			SmtpClient client = new SmtpClient();
+			client.UseDefaultCredentials = false;
 			client.Credentials = GetNetworkCredentials();
 			client.Port = 587;
 			client.Host = "smtp.gmail.com";
@@ -126,7 +127,7 @@ namespace Deano.Models.Business
 			}
 			catch (Exception ex)
 			{
-				response.Messages.Add(new JsonMessage("Your password could not be sent to your email account.", JsonMessageType.Error));
+				response.Messages.Add(new JsonMessage(ex.Message, JsonMessageType.Error));
 				response.Success = false;
 			}
 
