@@ -13,7 +13,6 @@ using Deano.Models.Prototypes.Shared;
 using Google.GData.Photos;
 using System.IO;
 using System.Globalization;
-using System.Net.Mail;
 using System.Net;
 using Deano.Models.Static;
 using Google.GData.Client;
@@ -25,6 +24,14 @@ using System.Net.Http;
 using Google.Apis.PhotosLibrary.v1.Data;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using MailKit.Net.Smtp;
+using MimeKit;
+using MailKit.Security;
+using System.Threading;
+using Google.Apis.Gmail.v1;
+using Google.Apis.Gmail.v1.Data;
+using System.Web.Mail;
+using log4net.Layout;
 
 namespace Deano.Models.Business
 {
@@ -37,7 +44,7 @@ namespace Deano.Models.Business
 		private NetworkCredential GetNetworkCredentials()
 		{
 			string username = data.GetSetting(Settings.EmailCredentialsUsername).Value;
-			string password = "zomjdeswaauamvsr";// data.GetSetting(Settings.EmailCredentialsPassword).Value;
+			string password = "L>BMF4WSdA2d8qB<";// data.GetSetting(Settings.EmailCredentialsPassword).Value;
 			NetworkCredential credentials = new NetworkCredential(username, password);
 			return credentials;
 		}
@@ -45,11 +52,17 @@ namespace Deano.Models.Business
 		private SmtpClient GetSmtpClient()
 		{
 			SmtpClient client = new SmtpClient();
-			client.UseDefaultCredentials = false;
-			client.Credentials = GetNetworkCredentials();
-			client.Port = 587;
-			client.Host = "smtp.gmail.com";
-			client.EnableSsl = true;
+			//client.UseDefaultCredentials = false;
+			//client.Credentials = GetNetworkCredentials();
+			//client.Port = 587;
+			//client.Host = "smtp.gmail.com";
+			//client.EnableSsl = true";
+			string password = "wusd ylaa disg cbqu";
+			string username = data.GetSetting(Settings.EmailCredentialsUsername).Value;
+			var uri = new Uri("smtps://smtp.gmail.com:465");
+			client.RequireTLS = true;
+			client.Connect(uri);
+
 
 			return client;
 		}
@@ -77,7 +90,7 @@ namespace Deano.Models.Business
 			return UserTransformation.Transform<prototypes.User>(model);
 		}
 
-		public bool SendMessage(Message message, out JsonResponse response)
+		public bool SendMessage(data.Message message, out JsonResponse response)
 		{
 			response = new JsonResponse();
 			SmtpClient client = GetSmtpClient();
@@ -85,21 +98,21 @@ namespace Deano.Models.Business
 			Setting displayName = data.GetSetting(Settings.RequestDisplayName);
 			Setting fromAddress = data.GetSetting(Settings.NoReplyEmailAddress);
 			Setting toAddress = data.GetSetting(Settings.RequestEmailAddress);
+			var tos = new List<InternetAddress>();
 			try
 			{
 				message.MessageDate = DateTime.Now;
 				data.SaveMessage(message);
 
-				MailAddress maFrom = new MailAddress(fromAddress.Value, displayName.Value, Encoding.UTF8);
-				MailMessage mmsg = new MailMessage();
-				mmsg.From = maFrom;
+				var maFrom = new MailboxAddress(fromAddress.Value, displayName.Value);//, Encoding.UTF8);
+																					  //	MailMessage mmsg = new MailMessage();
+																					  //	mmsg.From = maFrom;
 
 				foreach (string mailTo in toAddress.Value.Split(new string[] { ";", "," }, StringSplitOptions.RemoveEmptyEntries))
 				{
-					MailAddress maTo = new MailAddress(mailTo, displayName.Value, Encoding.UTF8);
-					mmsg.To.Add(maTo);
+					var maTo = new MailboxAddress(mailTo, displayName.Value);//, Encoding.UTF8);
+					tos.Add(maTo);
 				}
-
 				string messageDate = string.Format("Message date {0}. ", message.MessageDate);
 				string fromEmail = string.Format("Message email {0}. ", message.FromEmail);
 				string fromName = string.Format("Message name {0}. ", message.FromName);
@@ -113,14 +126,81 @@ namespace Deano.Models.Business
 				string[] segments = new string[] { messageDate, fromEmail, fromName, fromPhone, requestDate,
 			   requestType,requestSize ,requestSubject,requestBody,requestCatch};
 
-				string body = "<div>" + string.Join("</div><div>", segments) + "</div>";
-				mmsg.Body = "<html><body>" + body + "</body></html>";
-				mmsg.BodyEncoding = Encoding.UTF8;
-				mmsg.IsBodyHtml = true;
-				mmsg.Subject = "Guide Trip Request";
-				mmsg.SubjectEncoding = Encoding.UTF8;
+				BodyBuilder emailBodyBuilder = new BodyBuilder();
 
-				client.Send(mmsg);
+				string body = "<div>" + string.Join("</div><div>", segments) + "</div>";
+				//mmsg.Body = "<html><body>" + body + "</body></html>";
+				emailBodyBuilder.HtmlBody = "<html><body>" + body + "</body></html>"; ;
+				//mm.Body = emailBodyBuilder.ToMessageBody();
+				//mmsg.BodyEncoding = Encoding.UTF8;
+				//mmsg.IsBodyHtml = true;
+				//mmsg.Subject = "Guide Trip Request";
+				//mmsg.SubjectEncoding = Encoding.UTF8;
+				//
+
+				MimeMessage mm = new MimeMessage(new List<InternetAddress>() { maFrom }, tos,
+					"Guide Trip Request", emailBodyBuilder.ToMessageBody());
+				//client.Send(mm);
+				string accessToken;
+				//var service = GetPicasaService(out accessToken);
+				string username = data.GetSetting(Settings.EmailCredentialsUsername).Value;
+				//var oauth2 = new SaslMechanismOAuth2(username, accessToken);
+				//client.Authenticate(oauth2, CancellationToken.None);
+				//	client.Send(mm);
+				var directory = HttpRuntime.BinDirectory;
+				string serviceAccountEmail = "deano-131@api-project-846631412293.deanosguideservice.com.iam.gserviceaccount.com";
+				string certificatePath = System.Web.HttpContext.Current.Server.MapPath(@"\Shared\API Project-6268c4278944.p12");
+
+				byte[] bytes = null;
+				using (FileStream p12File = new FileStream(certificatePath, FileMode.Open))
+				{
+					using (MemoryStream ms = new MemoryStream())
+					{
+						p12File.CopyTo(ms);
+						bytes = ms.ToArray();
+						ms.Dispose();
+					}
+				}
+				if (bytes == null || bytes.Length == 0)
+				{
+					throw new ApplicationException("Could not find file " + certificatePath);
+				}
+				string t;
+				var s = GetPicasaService(out t);
+
+				var certificate = new X509Certificate2(bytes, "notasecret", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+				var serviceAccountCredential = new ServiceAccountCredential(new ServiceAccountCredential.Initializer(serviceAccountEmail)
+				{
+					Scopes = new string[]
+					{ "https://www.googleapis.com/auth/photoslibrary.readonly",
+					"https://www.googleapis.com/auth/photoslibrary.sharing","https://mail.google.com/",
+						"https://www.googleapis.com/auth/gmail.send"
+					}, // "https://picasaweb.google.com/data/" },
+					User = "admin@deanosguideservice.com",
+
+				}.FromCertificate(certificate));
+
+
+				serviceAccountCredential.RequestAccessTokenAsync(CancellationToken.None).Wait();
+
+
+				SmtpClient xclient = new SmtpClient();
+				//var uri = new Uri("smtps://smtp.gmail.com 587");
+				var uri = new Uri("smtps://smtp.gmail.com:465");
+				var oauth2 = new SaslMechanismOAuth2("admin@deanosguideservice.com", serviceAccountCredential.Token.AccessToken);
+				//xclient.RequireTLS = true;
+				//xclient.Connect(uri);
+
+
+				//xclient.Authenticate(oauth2, CancellationToken.None);
+				//xclient.Send(mm);
+				var gmailMessage = new Google.Apis.Gmail.v1.Data.Message
+				{
+					Raw = Encode(mm.ToString())
+				};
+				var service = new GmailService(new BaseClientService.Initializer() {  HttpClientInitializer = serviceAccountCredential });
+				Google.Apis.Gmail.v1.UsersResource.MessagesResource.SendRequest request = service.Users.Messages.Send(gmailMessage, "admin@deanosguideservice.com");
+				request.Execute();
 				response.Messages.Add(new JsonMessage("Your request for a trip has been sent to Deano.", JsonMessageType.Info));
 				response.Success = true;
 				return true;
@@ -133,7 +213,15 @@ namespace Deano.Models.Business
 
 			return false;
 		}
+		public static string Encode(string text)
+		{
+			byte[] bytes = System.Text.Encoding.UTF8.GetBytes(text);
 
+			return System.Convert.ToBase64String(bytes)
+				.Replace('+', '-')
+				.Replace('/', '_')
+				.Replace("=", "");
+		}
 		public bool SendForgotPasswordEmail(string username, out JsonResponse response)
 		{
 			response = new JsonResponse();
@@ -152,19 +240,19 @@ namespace Deano.Models.Business
 				Setting displayName = data.GetSetting(Settings.RequestDisplayName);
 				Setting fromAddress = data.GetSetting(Settings.NoReplyEmailAddress);
 
-				MailAddress
-					maFrom = new MailAddress(fromAddress.Value, displayName.Value, Encoding.UTF8),
-					maTo = new MailAddress(account.Name, account.Name, Encoding.UTF8);
+				//MailAddress
+				//	maFrom = new MailAddress(fromAddress.Value, displayName.Value, Encoding.UTF8),
+				//	maTo = new MailAddress(account.Name, account.Name, Encoding.UTF8);
 
-				MailMessage mmsg = new MailMessage(maFrom, maTo);
-				string message = string.Format("Your password for {0} is {1}.", domainName.Value, Crypto.Decrypt(account.Password));
-				mmsg.Body = "<html><body><span></span>" + message + "</body></html>";
-				mmsg.BodyEncoding = Encoding.UTF8;
-				mmsg.IsBodyHtml = true;
-				mmsg.Subject = "Account Information from Deano";
-				mmsg.SubjectEncoding = Encoding.UTF8;
+				//MailMessage mmsg = new MailMessage(maFrom, maTo);
+				//string message = string.Format("Your password for {0} is {1}.", domainName.Value, Crypto.Decrypt(account.Password));
+				//mmsg.Body = "<html><body><span></span>" + message + "</body></html>";
+				//mmsg.BodyEncoding = Encoding.UTF8;
+				//mmsg.IsBodyHtml = true;
+				//mmsg.Subject = "Account Information from Deano";
+				//mmsg.SubjectEncoding = Encoding.UTF8;
 
-				client.Send(mmsg);
+				//client.Send(mmsg);
 				response.Messages.Add(new JsonMessage("Your password has been sent to your email account.", JsonMessageType.Info));
 				response.Success = true;
 				return true;

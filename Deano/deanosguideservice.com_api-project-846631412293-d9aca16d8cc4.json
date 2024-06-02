@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "deanosguideservice.com:api-project-846631412293",
+  "private_key_id": "d9aca16d8cc4fd9cfecb27783884cff847ec99fd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCplbkUauixMFa5\nb5BXnkiIGBUb+PRwksOmap/gZF8WxkaZadrASA0aQ2VXywAhG2cZDgO0ZBHLeRLk\nxtVDN6FgVgUYd4bZaqFETS7L2AhBoOcxAusENf6pgdyVdJpk4psEuDh5OFLXQb9y\nw5Ep3wKg1sdsoeqgVJyy8RH1HTcz6dIduBv7hovoQUYuPnPjqJLod1jn7DEVJja0\nWiZFvzvCdEgUoF4qGsQ4ldrtjmqbYF6WnQn3aQdYurxxYB3IFjtRpYBs2NElFAeu\nGmYB/x9gW9i8l/ARuiwM0himEfOEiv+frlLZhphcbg8RyJN0iQRznnLIoCBfjOF1\ntU2TXxpfAgMBAAECggEAMatboQJLExKgZAGsGi2O+uVq0V2SYqJp0YUrPHLJcwcx\nyF87pdO0mrugpB0d9ZRsFueG6D/jAmB8yyr9bYmOp4OqTGc9xNI5V6LvkN6+VFKH\nRFChewNBim4xqEiVq/S/CJvYVpDLmqZ0J23mR4g84dTmZgfqi3kcyEBZTRx4faiE\nSgV5lSvutQECClh6xf3VdbymIDtrOZ7QndzgsGjrOMVgIawKtYNE087BcYe13OZ2\n4j3EAMfSr6SRsErMv+xHjVDmohhBzRdioVuyJ+nEXgpXn2EGqoUVCrSzpYjV3MU1\nw2PyjQn8o/rYIgmSGz7GFo+VIYbQ3b4B8TkZho+nIQKBgQDsoY3jUs1Xju7AnEya\nXSuI2vmrJXSvXpCkLmHzq4aNL4j3mUmvM4bWOI6YNNC6L3wyGkTPT9uqY9+QSur5\nAaNUjGxtfM0jXL8klj5Fjc/9iN6T4NduTp+Y+P0zyqoUsluVrcOG/kf1XUN+ockU\nkhwY2/1J1yajPkUR4CbBDvVBLwKBgQC3d0KXy5Q5H9TIIR8qpZhY1sTAnpVjbMBM\n4gAPG/5nrfi7hbnFVb/lh7xl1Wm99qgKfn8dsWkRQ42guqZQ3tCWD7rJ1rUH70kx\nxTvnpO5g1YT0memwuiGphrENo0qXP2Y7/d7tZg9xKFSdGH/LNqYk4fyTE3vwAXy8\nS83BYCKN0QKBgFYSFWggUCyPAuzwbTSguxsWe0XzY9P+E6KEdICLXW+xYKKfERw3\nI8571/IpE9sFNqmKwIifxYjetwznEzzriZtRUIcqo/s+2w/VzmTCRms0A7HKUNIA\nqzCbMI5MIz1P+twgzkQl7cqj188RzfA7jRjFvAXFynoKRllQLQiABlllAoGBAIe1\nKsgXqUtb9UwX2/LyzK8iJiWI6F3ECraUEZEbluJgOHWVZCXI2QpSjhQReYcvlXs1\nuJdhLKO9gVyb0/xL5KSre/Ji5EO7RzwOddJSGJX+Orunwcmc1NuOKxc4aytXlSrZ\nDfYyoUeFmpkdjyHlCZ6MnwS3y9xrbTXnKIparxSRAoGAJbS0Ym9MLtzZeAER1CQd\nCZ9vhp0SDPquETfipO5arYyPaNQSPINj2uGIVCcFb3fJoOHjncdXBVcDqhPsSF9y\nXhi1xMJK9BzevzXVOihm1jFzd4xAvQWxKXNLOH/d7dtmMtHtwB6bEBs9h7j8sQL8\n9GzbxV/WZLpL2zwyJvNW8Os=\n-----END PRIVATE KEY-----\n",
+  "client_email": "deano-131@api-project-846631412293.deanosguideservice.com.iam.gserviceaccount.com",
+  "client_id": "",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/deano-131%40api-project-846631412293.deanosguideservice.com.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

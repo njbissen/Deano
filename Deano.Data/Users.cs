@@ -215,7 +215,7 @@ namespace Deano.Data
 				SettingKey.EmailCredentialsPassword, "fishWalleye"
 			},
 			{
-				SettingKey.RequestEmailAddress, "admin@deanosguideservice.com;nicholas.bissen@gmail.com;fish4walleye53716@yahoo.com"
+				SettingKey.RequestEmailAddress, "admin@deanosguideservice.com;nicholas.bissen@chrobinson.com;fish4walleye53716@yahoo.com"
 			},
 			{
 				SettingKey.RequestDisplayName, "deano"

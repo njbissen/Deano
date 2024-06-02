@@ -4,13 +4,13 @@
 
 @using BotDetect.Web.Mvc
 
-@{ 
-		MvcCaptcha exampleCaptcha = new MvcCaptcha("ExampleCaptcha");
-		exampleCaptcha.UserInputID = "CaptchaCode";
-	}
+@{
+	MvcCaptcha exampleCaptcha = new MvcCaptcha("ExampleCaptcha");
+	exampleCaptcha.UserInputID = "CaptchaCode";
+}
 
 @model Deano.Data.Message
-<link href="<%: Url.Content(" ~ /" + BotDetect.Web.CaptchaUrls.LayoutStyleSheetUrl) %>"    rel="stylesheet" type="text/css" />
+<link href="<%: Url.Content(" ~ /" + BotDetect.Web.CaptchaUrls.LayoutStyleSheetUrl) %>"     />
 <script type="text/javascript">
 
 	var responseMessage = null;
@@ -82,7 +82,24 @@
 	}
 	);
 </script>
-<div id="walleyesContainer">
+<div id="title">
+	<img title="Deano's Guide Service" alt="Deano's Guide Service" style="float: left" src="../../Content/Images/deanos_logo.gif" />
+	<div style="float: left; margin-top: 15px; font-size: 14px; font-style: bold; margin-right: 55px">
+		<div style="padding: 3px">
+			11292 W. Sandy Point Rd.
+		</div>
+		<div style="padding: 3px">
+			Couderay, WI 54828
+		</div>
+		<div style="padding: 3px">
+			(715) 558-8732
+		</div>
+	</div>
+	<div style="padding-top:50px">
+		Give us a call to make a reservation
+	</div>
+</div>
+<div id="walleyesContainer" style="visibility:hidden">
 	<div id="walleyes">
 		<div id="walleyesTitle">
 			Request a Guide Trip

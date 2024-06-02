@@ -234,7 +234,15 @@
     <Content Include="Content\images\tit.png" />
     <Content Include="Content\Maps.css" />
     <Content Include="Content\smoothDivScroll.css" />
-    <Content Include="GoogleServiceAccountInfo.txt" />
+    <Content Include="deanosguideservice.com_api-project-846631412293-d9aca16d8cc4.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="deanosguideservice.com_api-project-846631412293-3443ddd4b4fe.p12">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="GoogleServiceAccountInfo.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="printMinneapolis.htm" />
     <Content Include="Global.asax" />
     <Content Include="printMadison.htm" />
